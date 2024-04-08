@@ -1,0 +1,291 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.nav-link-side {
+    padding: 30px 30px; /* Preenchimento */
+    text-align: center; /* Alinhamento do texto */
+    color: #dbae3f; /* Cor do texto */
+    font-size: 10px;
+    text-decoration: none;
+}
+
+.navbar-custom {
+    position: fixed;
+    background-color: #f8f9fa; /* Cor de fundo */
+    border-bottom: 1px solid #dee2e6; /* Borda inferior */
+    position: relative; /* Posição relativa */
+    z-index: 2000; /* Garante que a topbar esteja acima da sidebar */
+    text-align: left; /* Alinha o conteúdo da topbar à esquerda */
+}
+
+/* Estilo personalizado para o footer */
+.footer-custom {
+    background-color: #f8f9fa; /* Cor de fundo */
+    border-top: 1px solid #dee2e6; /* Borda superior */
+    position: relative; /* Posição relativa */
+    z-index: 1000; /* Z-index para sobrepor a sidebar */
+    text-align: left; /* Alinha o conteúdo do footer à esquerda */
+    margin-left: 0; /* Remove a margem */
+    height: 60px;
+}
+
+/* Estilo para a barra lateral (sidebar) */
+#sidebar {
+    background-color: white; /* Cor de fundo */
+    color: #dbae3f; /* Cor do texto */
+    width: 250px; /* Largura */
+    position: absolute; /* Posição fixa */
+    top: 0px; /* Alinhamento ao topo */
+    left: 0; /* Alinhamento à esquerda */
+    height: 100%; /* Altura total */
+    overflow-y: auto; /* Rolagem vertical */
+    padding-top: 100px; /* Preenchimento superior */
+    z-index: 1000; /* Z-index */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+    #sidebar .sidebar-heading {
+        padding: 20px; /* Preenchimento */
+        text-align: center; /* Alinhamento do texto */
+        font-size: 24x; /* Tamanho da fonte */
+        color: #dbae3f; /* Cor do texto */
+    }
+
+    #sidebar .nav-link:hover {
+        /* background-color: dimgrey; /* Cor de fundo ao passar o mouse */ */
+    }
+
+    #sidebar .active {
+        background-color: #2c3e50; /* Cor de fundo do item ativo */
+    }
+
+/* Estilo para o conteúdo principal */
+#main-content {
+    padding: 20px; /* Preenchimento */
+    margin-top: 0px; /* Margem superior */
+    margin-bottom: 20px;
+    z-index: 0; /* Z-index */
+    position: relative; /* Posição relativa */
+}
+
+.list-group-item {
+    /*  background-color: red !important; */
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Estilo para os botões de ação */
+.acao-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.acao-btn-danger {
+    background-color: #dc3545;
+}
+
+/* Estilo para os botões de ordenação */
+.dropdown-menu {
+    min-width: 0;
+}
+
+    .dropdown-menu a {
+        font-size: 12px;
+    }
+
+.corCentral {
+    background-color: #1a1928;
+    color: #ffd700;
+    font-family: Arial, Helvetica, sans-serif; /* Define a fonte padrão para o corpo do texto */
+}
+
+.cotainer-home {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px;
+    margin-bottom: 20px;
+}
+
+.mt-4 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+img {
+    margin: 20px 0; /* Adiciona margem acima e abaixo da imagem */
+}
+
+
+.nav-link-side {
+    padding: 30px 30px; /* Preenchimento */
+    text-align: center; /* Alinhamento do texto */
+    color: #dbae3f; /* Cor do texto */
+    font-size: 10px;
+    text-decoration: none;
+}
+
+.navbar-custom {
+    position: fixed;
+    background-color: #f8f9fa; /* Cor de fundo */
+    border-bottom: 1px solid #dee2e6; /* Borda inferior */
+    position: relative; /* Posição relativa */
+    z-index: 2000; /* Garante que a topbar esteja acima da sidebar */
+    text-align: left; /* Alinha o conteúdo da topbar à esquerda */
+}
+
+/* Estilo personalizado para o footer */
+.footer-custom {
+    background-color: #f8f9fa; /* Cor de fundo */
+    border-top: 1px solid #dee2e6; /* Borda superior */
+    position: relative; /* Posição relativa */
+    z-index: 1000; /* Z-index para sobrepor a sidebar */
+    text-align: left; /* Alinha o conteúdo do footer à esquerda */
+    margin-left: 0; /* Remove a margem */
+    height: 60px;
+}
+
+/* Estilo para a barra lateral (sidebar) */
+#sidebar {
+    background-color: white; /* Cor de fundo */
+    color: #dbae3f; /* Cor do texto */
+    width: 250px; /* Largura */
+    position: absolute; /* Posição fixa */
+    top: 0px; /* Alinhamento ao topo */
+    left: 0; /* Alinhamento à esquerda */
+    height: 100%; /* Altura total */
+    overflow-y: auto; /* Rolagem vertical */
+    padding-top: 100px; /* Preenchimento superior */
+    z-index: 1000; /* Z-index */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+    #sidebar .sidebar-heading {
+        padding: 20px; /* Preenchimento */
+        text-align: center; /* Alinhamento do texto */
+        font-size: 24x; /* Tamanho da fonte */
+        color: #dbae3f; /* Cor do texto */
+    }
+
+    #sidebar .nav-link:hover {
+        /* background-color: dimgrey; /* Cor de fundo ao passar o mouse */ */
+    }
+
+    #sidebar .active {
+        background-color: #2c3e50; /* Cor de fundo do item ativo */
+    }
+
+/* Estilo para o conteúdo principal */
+#main-content {
+    padding: 20px; /* Preenchimento */
+    margin-top: 0px; /* Margem superior */
+    margin-bottom: 20px;
+    z-index: 0; /* Z-index */
+    position: relative; /* Posição relativa */
+}
+
+.list-group-item {
+    /*  background-color: red !important; */
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Estilo para os botões de ação */
+.acao-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.acao-btn-danger {
+    background-color: #dc3545;
+}
+
+/* Estilo para os botões de ordenação */
+.dropdown-menu {
+    min-width: 0;
+}
+
+    .dropdown-menu a {
+        font-size: 12px;
+    }

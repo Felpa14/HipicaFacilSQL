@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HipicaFacil</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HipicaFacilSQL.styles.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-light text-center">Hipica Fácil</div>
+            <div class="list-group list-group-flush text-center">
+                <a class=" list-group-item list-group-item-action  p-3 bg-cor" asp-area="" asp-page="/Index"><i class="fas fa-home"></i> Home </a>
+                <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Clientes/Index"><i class="fas fa-users"></i> Clientes</a>
+                <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Cavalos/Index"><i class="fas fa-horse"></i> Cavalos</a>
+                <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Produtos/Index"><i class="fas fa-box"></i> Estoque</a>
+                <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Financas"><i class="fas fa-money-bill"></i> Finanças</a>
+                <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Agenda"><i class="fas fa-calendar-alt"></i> Agenda</a>
+                <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Privacidade"><i class="fas fa-lock"></i> Privacidade</a>
+
+            </div>
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-black" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                </div>
+            </nav>
+            <div>
+
+                <div id="main-content" class="">
+                    <div class="container">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+
+
+    <footer class="border-top text-muted footer-custom">
+        <div class="container-fluid">
+            Desenvolvido por Sabrina Gomes & Felipe Gabriel - &copy; 2024 - HipicaFacil - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html> 
