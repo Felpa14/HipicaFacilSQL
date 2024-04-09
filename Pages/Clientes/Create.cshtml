@@ -56,11 +56,12 @@
         <br />
         <div class="row">
             <div class="col-sm-12 ">
-                <button type="submit" class="btn btn-primary mt-3">Adicionar Cliente</button>
+                <button type="submit" value="Create" class="btn btn-primary mt-3">Adicionar Cliente</button>
             </div>
         </div>
     </div>
 </form>
+
 @* <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -102,5 +103,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

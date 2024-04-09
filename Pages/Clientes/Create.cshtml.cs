@@ -28,17 +28,34 @@ namespace HipicaFacilSQL.Pages.Clientes
         public Cliente Cliente { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            var emptyCliente = new Cliente();
+
+            if (await TryUpdateModelAsync<Cliente>(
+                emptyCliente,
+                "Cliente",   // Prefix for form value.
+                c => c.Nome, c => c.Email, c => c.Endereco, c => c.Cpf, c =>c.Cpf, c => c.Telefone))
             {
-                return Page();
+                _context.Clientes.Add(emptyCliente);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
 
-            _context.Clientes.Add(Cliente);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index"); ;
         }
+        //public async Task<IActionResult> OnPostAsync()
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Page();
+        //    }
+
+        //    _context.Clientes.Add(Cliente);
+        //    await _context.SaveChangesAsync();
+
+        //    return RedirectToPage("./Index");
+        //}
     }
 }
