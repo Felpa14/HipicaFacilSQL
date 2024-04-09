@@ -9,45 +9,60 @@
 
 <h4>Cliente</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Cliente.ID" />
-            <div class="form-group">
-                <label asp-for="Cliente.Nome" class="control-label"></label>
-                <input asp-for="Cliente.Nome" class="form-control" />
-                <span asp-validation-for="Cliente.Nome" class="text-danger"></span>
+<form method="post">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="nome" placeholder=" " required asp-for="Cliente.Nome" />
+                    <label for="nome">Nome:</label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Cliente.Email" class="control-label"></label>
-                <input asp-for="Cliente.Email" class="form-control" />
-                <span asp-validation-for="Cliente.Email" class="text-danger"></span>
+
+            <div class="col-sm-6">
+                <div class="form-floating">
+                    <input type="email" id="email" asp-for="Cliente.Email" class="form-control" placeholder=" " />
+                    <label for="email">Email:</label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Cliente.Endereco" class="control-label"></label>
-                <input asp-for="Cliente.Endereco" class="form-control" />
-                <span asp-validation-for="Cliente.Endereco" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-floating">
+                    <input type="text" id="cpf" asp-for="Cliente.Cpf" class="form-control" placeholder="Ex: 123.456.789-10" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" oninput="formatarCPF(this)" />
+
+                    <label for="cpf">CPF:</label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Cliente.Cpf" class="control-label"></label>
-                <input asp-for="Cliente.Cpf" class="form-control" />
-                <span asp-validation-for="Cliente.Cpf" class="text-danger"></span>
+            <div class="col-sm-6">
+                <div class="form-floating">
+                    <input type="text" id="telefone" asp-for="Cliente.Telefone" class="form-control" placeholder="Ex: (12)34567-8901" required pattern="\(\d{2}\)\d{5}-\d{4}" oninput="formatarTelefone(this)" />
+
+                    <label for="telefone">Telefone:</label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Cliente.Telefone" class="control-label"></label>
-                <input asp-for="Cliente.Telefone" class="form-control" />
-                <span asp-validation-for="Cliente.Telefone" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-floating">
+                    <input type="text" id="endereco" asp-for="Cliente.Endereco" class="form-control" placeholder=" " />
+                    <label for="endereco">Endereço:</label>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-12 ">
+                <button type="submit" class="btn btn-primary mt-3">Editar Cliente</button>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index"> <i class="fa-solid fa-backward"></i> Voltar</a>
 </div>
 
 @section Scripts {
