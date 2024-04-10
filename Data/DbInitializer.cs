@@ -30,6 +30,20 @@ namespace HipicaFacilSQL.Data
             context.Clientes.AddRange(clientes);
             context.SaveChanges();
 
+
+            var cavalos = new Cavalo[]
+            {
+                new Cavalo
+                {
+                    Nome="Carson",
+                    Raca="campolinu",
+                  
+                    
+                },
+            };
+            context.Cavalos.AddRange(cavalos);
+            context.SaveChanges();
+
             //var courses = new Course[]
             //{
             //    new Course{CourseID=1050,Title="Chemistry",Credits=3},

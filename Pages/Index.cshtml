@@ -1,26 +1,38 @@
 ﻿@page
 @model IndexModel
 @{
+
     ViewData["Title"] = "Home page";
 }
 <!-- Page content-->
 <section class="home-slider js-fullheight owl-carousel">
-		<div class="slider-item js-fullheight" style="background-image:url(images/bg_1.jpg);">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-					<div class="col-md-7 text ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-			            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Hipica Facil - Um novo conceito em 
-							gestão de Hípicas</h1>
-					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-						Somos uma equipe apaixonada por cavalos e comprometida em fornecer as melhores soluções para o gerenciamento de hípicas.
-						
-					</p>
-			            <!--<p><a href="#" class="btn btn-white btn-outline-white px-4 py-3 mt-3" data-toggle="modal" data-target="#modalRequest">Make an Appointment</a></p>-->
-			          </div>
-		        </div>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="container col-mb-6">
+				<img src="~/img/823899-horse-racing-race-equestrian-sport-jockey-horses.jpg" width="420" height="232" />
+				<
 			</div>
 		</div>
+		<div class="col-sm-6">
+				<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
+					<div class="col-md-7 text ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+						<h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+							Hipica Facil - Um novo conceito em
+							gestão de Hípicas
+						</h1>
+						<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+							Somos uma equipe apaixonada por cavalos e comprometida em fornecer as melhores soluções para o gerenciamento de hípicas.
+
+						</p>
+						<!--<p><a href="#" class="btn btn-white btn-outline-white px-4 py-3 mt-3" data-toggle="modal" data-target="#modalRequest">Make an Appointment</a></p>-->
+					</div>
+				</div>
+			</div>
+		</div>
+	@* 
+			
+		 *@
 
 		<div class="slider-item js-fullheight" style="background-image:url(images/bg_2.jpg);">
 			<div class="overlay"></div>
