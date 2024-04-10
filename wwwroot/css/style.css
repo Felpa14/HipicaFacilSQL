@@ -8166,7 +8166,7 @@ textarea.form-control-lg {
 }
 
 .justify-content-end {
-    justify-content: flex-end !important;
+    justify-content: flex-start !important;
 }
 
 .justify-content-center {

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using HipicaFacilSQL.Data;
 using HipicaFacilSQL.Models;
+using Microsoft.AspNetCore.Hosting;
 
 namespace HipicaFacilSQL.Pages
 {
