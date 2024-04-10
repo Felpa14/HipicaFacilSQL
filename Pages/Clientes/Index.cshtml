@@ -4,8 +4,102 @@
 @{
     ViewData["Title"] = "Index";
 }
-
 <h1>Cadastro de Clientes</h1>
+<br />
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Encontre pelo Nome:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Volte para a lista</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NomeSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Clientes[0].Nome)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CpfSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                @Html.DisplayNameFor(model => model.Clientes[0].Cpf)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clientes[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clientes[0].Endereco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clientes[0].Telefone)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Clientes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cpf)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID"><i class="fa-solid fa-pen"></i></a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID"><i class="fa-solid fa-magnifying-glass"></i></a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID"><i class="fa-solid fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.Clientes.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Clientes.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Clientes.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Anterior
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Clientes.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Próximo
+</a>
+
+
+@* <h1>Cadastro de Clientes</h1>
 <br />
 
 <p>
@@ -15,25 +109,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Cliente[0].Nome)
+                @Html.DisplayNameFor(model => model.Clientes[0].Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cliente[0].Email)
+                @Html.DisplayNameFor(model => model.Clientes[0].Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cliente[0].Endereco)
+                @Html.DisplayNameFor(model => model.Clientes[0].Endereco)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cliente[0].Cpf)
+                @Html.DisplayNameFor(model => model.Clientes[0].Cpf)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cliente[0].Telefone)
+                @Html.DisplayNameFor(model => model.Clientes[0].Telefone)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Cliente) {
+@foreach (var item in Model.Clientes) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
@@ -58,4 +152,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table> *@

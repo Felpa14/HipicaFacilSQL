@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using HipicaFacilSQL.Data;
+using Microsoft.Extensions.Configuration;
 using HipicaFacilSQL.Models;
 
 namespace HipicaFacilSQL.Pages.Clientes
@@ -25,9 +22,8 @@ namespace HipicaFacilSQL.Pages.Clientes
         }
 
         [BindProperty]
-        public Cliente Cliente { get; set; } = default!;
+        public Cliente Cliente { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -35,10 +31,18 @@ namespace HipicaFacilSQL.Pages.Clientes
                 return Page();
             }
 
-            _context.Clientes.Add(Cliente);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            try
+            {
+                _context.Clientes.Add(Cliente);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            catch (Exception ex)
+            {
+                // Registre ou manipule a exceção conforme necessário.
+                ModelState.AddModelError("", "Ocorreu um erro ao salvar os dados do cliente.");
+                return Page();
+            }
         }
     }
 }

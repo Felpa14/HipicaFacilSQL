@@ -30,7 +30,7 @@ namespace HipicaFacilSQL.Pages.Clientes
                 return NotFound();
             }
 
-            var cliente =  await _context.Clientes.FirstOrDefaultAsync(m => m.ID == id);
+            var cliente =  await _context.Clientes.FirstOrDefaultAsync(c => c.ID == id);
             if (cliente == null)
             {
                 return NotFound();
