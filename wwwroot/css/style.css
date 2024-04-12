@@ -119,13 +119,10 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     line-height: 1.2;
 }
 
-h1, .h1 {
-    font-size: calc(1.375rem + 1.5vw);
-}
-
 @media (min-width: 1200px) {
     h1, .h1 {
         font-size: 2.5rem;
+        color: #2f2e3c;
     }
 }
 
@@ -170,6 +167,7 @@ h6, .h6 {
 p {
     margin-top: 0;
     margin-bottom: 1rem;
+    color: #2f2e3c;
 }
 
 abbr[title] {
@@ -249,7 +247,7 @@ sup {
 }
 
 a {
-   color: var(--bs-body-color);
+    color: #1a1928;
     text-decoration: none;
 }
 
@@ -5623,6 +5621,7 @@ textarea.form-control-lg {
 
     .list-group-flush > .list-group-item {
         border-width: 0 0 var(--bs-list-group-border-width);
+        color: #2f2e3c;
     }
 
         .list-group-flush > .list-group-item:last-child {
@@ -12425,6 +12424,8 @@ textarea.form-control-lg {
     #sidebar-wrapper .sidebar-heading {
         padding: 0.875rem 1.25rem;
         font-size: 1.2rem;
+        color: #2f2e3c;
+        font-weight:700;
     }
 
     #sidebar-wrapper .list-group {
