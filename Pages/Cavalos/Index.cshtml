@@ -10,26 +10,38 @@
 <p>
     <a asp-page="Create"> <i class="fa-solid fa-plus"></i> Novo Cavalo</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Encontre pelo Nome:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Pesquisar" class="btn btn-primary" /> |
+            <a asp-page="./Index">Voltar para a tabela</a>
+        </p>
+
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Cavalo[0].Nome)
+                @Html.DisplayNameFor(model => model.Cavalos[0].Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cavalo[0].Raca)
+                @Html.DisplayNameFor(model => model.Cavalos[0].Raca)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cavalo[0].Idade)
+                @Html.DisplayNameFor(model => model.Cavalos[0].Idade)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cavalo[0].Peso)
+                @Html.DisplayNameFor(model => model.Cavalos[0].Peso)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Cavalo) {
+@foreach (var item in Model.Cavalos) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
@@ -44,11 +56,30 @@
                 @Html.DisplayFor(modelItem => item.Peso)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.ID"><i class="fa-solid fa-pen"></i></a> |
+                <a asp-page="./Details" asp-route-id="@item.ID"><i class="fa-solid fa-magnifying-glass"></i></a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID"><i class="fa-solid fa-trash"></i></a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Cavalos.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Cavalos.HasNextPage ? "disabled" : "";
+}
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Cavalos.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Anterior
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Cavalos.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Próximo
+</a>
