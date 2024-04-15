@@ -26,7 +26,10 @@
     <thead>
         <tr>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NomeSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
                 @Html.DisplayNameFor(model => model.Cavalos[0].Nome)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cavalos[0].Raca)

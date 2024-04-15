@@ -5,9 +5,57 @@
     ViewData["Title"] = "Create";
 }
 
-<h1 class="fs-2">Cadastrar Estoque</h1>
+<h1 class="fs-2">Cadastrar Produto</h1>
 <hr />
-<div class="row">
+
+<form method="post">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="nome" placeholder="" required asp-for="Produto.Nome" />
+                    <label for="nome">Nome:</label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-floating">
+                    <select id="raca" asp-for="Produto.Tipo" class="form-select" required>
+                        <option value="">Selecione o tipo do produto</option>
+                        <option value="Perecivel">Perecivel</option>
+                        <option value="Não perecivel">Nao Perecivel</option>                       
+                    </select>
+                    <label for="tipo">Tipo:</label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-floating">
+                    <input type="text" id="descricao" asp-for="Produto.Descricao" class="form-control" placeholder=" " />
+                    <label for="descricao">Descrição:</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-floating">
+                    <input type="date" id="idade" asp-for="Produto.Validade" class="form-control" placeholder=" " />
+                    <label for="validade">Validade:</label>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="submit" value="Create" class="btn btn-primary mt-3">Cadastrar Produto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-page="Index"><i class="fa-solid fa-backward-step"></i>  Voltar para a Tabela</a>
+</div>
+@* <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -36,7 +84,7 @@
 <div>
     <a asp-page="Index"><i class="fa-solid fa-backward-step"></i>  Voltar para a Tabela</a>
 </div>
-
+ *@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

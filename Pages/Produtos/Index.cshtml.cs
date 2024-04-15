@@ -12,18 +12,59 @@ namespace HipicaFacilSQL.Pages.Produtos
 {
     public class IndexModel : PageModel
     {
-        private readonly HipicaFacilSQL.Data.HipicaContext _context;
+        private readonly HipicaContext _context;
+        private readonly IConfiguration Configuration;
 
-        public IndexModel(HipicaFacilSQL.Data.HipicaContext context)
+        public IndexModel(HipicaContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
-        public IList<Produto> Produto { get;set; } = default!;
+        public string NomeSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
-        public async Task OnGetAsync()
+        public PaginatedList<Produto> Produtos { get; set; }
+
+
+         public async Task OnGetAsync(string sortOrder,
+            string currentFilter, string searchString, int? pageIndex)
         {
-            Produto = await _context.Produtos.ToListAsync();
+            // using System;
+            CurrentSort = sortOrder;
+            NomeSort = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            CurrentFilter = searchString;
+
+            IQueryable<Produto> produtosIQ = from c in _context.Produtos
+                                             select c;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                produtosIQ = produtosIQ.Where(c => c.Nome.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "nome_desc":
+                    produtosIQ = produtosIQ.OrderByDescending(c => c.Nome);
+                    break;;
+                default:
+                    produtosIQ = produtosIQ.OrderBy(c => c.Nome);
+                    break;
+            }
+            var pageSize = Configuration.GetValue("PageSize", 4);
+            Produtos = await PaginatedList<Produto>.CreateAsync(
+                 produtosIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }
 }
