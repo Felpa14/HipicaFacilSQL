@@ -53,6 +53,7 @@
                     <label for="idade">Data de Nascimento:</label>
                 </div>
             </div>
+
             <div class="form-group col-sm-4">
                 <input type="file" id="imagem" class=" form-control-file" asp-for="Cavalo.Imagem">
                 <label for="exampleFormControlFile1">Anexo de documentos</label>
@@ -73,9 +74,42 @@
 
 @section Scripts {
     <script>
-        $(document).ready(function () {
-            $('#peso').mask('0000 kg');
+        // Função para adicionar "kg" ao valor inserido no campo de peso
+        function formatarPeso() {
+            var pesoInput = document.getElementById("peso");
+            var pesoValue = pesoInput.value.trim();
+
+            // Verificar se o valor inserido já possui "kg" no final
+            if (!pesoValue.endsWith("kg")) {
+                // Se não tiver "kg", adicionar
+                pesoValue += " kg";
+                pesoInput.value = pesoValue;
+            }
+        }
+
+        // Chamar a função quando o usuário sair do campo de peso
+        document.getElementById("peso").addEventListener("blur", formatarPeso);
+
+        // Função para calcular a idade com base na data de nascimento
+        function calcularIdade(dataNascimento) {
+            var hoje = new Date();
+            var nascimento = new Date(dataNascimento);
+            var idade = hoje.getFullYear() - nascimento.getFullYear();
+            var mes = hoje.getMonth() - nascimento.getMonth();
+            if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+                idade--;
+            }
+            return idade;
+        }
+
+        // Função para atualizar a idade do cavalo quando a data é alterada
+        document.getElementById("dataNascimento").addEventListener("change", function () {
+            var dataNascimento = this.value;
+            var idade = calcularIdade(dataNascimento);
+            document.getElementById("idadeCavalo").innerText = "Idade do cavalo: " + idade + " anos";
         });
     </script>
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
