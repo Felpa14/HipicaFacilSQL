@@ -5,17 +5,14 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Cavalo</h4>
+<h4>Editar Cavalo</h4>
 <hr />
 <form method="post">
     <div class="container text-center">
         <div class="row">
-            <input type="hidden" asp-for="Cavalo.ID" />
             <div class="col-sm-6">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="nome" placeholder="" required asp-for="Cavalo.Nome" />
+                    <input type="text" class="form-control" id="nome" placeholder="" maxlength="50" required asp-for="Cavalo.Nome" />
                     <label for="nome">Nome:</label>
                 </div>
             </div>
@@ -56,14 +53,17 @@
                     <label for="idade">Data de Nascimento:</label>
                 </div>
             </div>
+            @*
             <div class="form-group col-sm-4">
-                <input type="file" id="imagem" class=" form-control-file" asp-for="Cavalo.Imagem">
-                <label for="exampleFormControlFile1">Anexo de documentos</label>
-            </div>
+            <input type="file" id="imagem" class=" form-control-file" asp-for="Cavalo.Imagem">
+            <label for="exampleFormControlFile1">Anexo de documentos </label>
+            <label for="exampleFormControlFile1">Anexo de documentos</label>
+            >>>>>>> e70c8a25c0f67eba81ea46856c8f7c3084a814a6
+            </div> *@
             <br />
             <div class="row">
                 <div class="col-sm-12">
-                    <button type="submit" value="Create" class="btn btn-primary mt-3">Cadastrar Cavalo</button>
+                    <button type="submit" value="Create" class="btn btn-primary mt-3">Editar Cavalo</button>
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@
 </form>
 
 <div>
-    <a asp-page="./Index"> <i class="fa-solid fa-backward"></i> Voltar</a>
+    <a asp-page="./Index"> <i class="fa-solid fa-backward"></i> Voltar para a tabela </a>
 </div>
 
 @section Scripts {

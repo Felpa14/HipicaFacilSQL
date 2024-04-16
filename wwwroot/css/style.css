@@ -153,6 +153,7 @@ h4, .h4 {
 @media (min-width: 1200px) {
     h4, .h4 {
         font-size: 1.5rem;
+        color: #dbae3f;
     }
 }
 
