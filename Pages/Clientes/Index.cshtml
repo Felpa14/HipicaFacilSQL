@@ -17,7 +17,7 @@
             Encontre pelo Nome:
             <input type="text" name="SearchString" value="@Model.CurrentFilter" />
             <input type="submit" value="Pesquisar" class="btn btn-primary" /> |
-            <a asp-page="./Index">Voltar para a tabela</a>
+ @*            <a asp-page="./Index">Voltar para a tabela</a> *@
         </p>
 
     </div>
@@ -36,14 +36,14 @@
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.CpfSort"
                    asp-route-currentFilter="@Model.CurrentFilter">
-                @Html.DisplayNameFor(model => model.Clientes[0].Cpf)
+                CPF
                 </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Clientes[0].Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Clientes[0].Endereco)
+               Endereço
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Clientes[0].Telefone)
@@ -60,13 +60,13 @@
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Cpf)
+                    CPF
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Endereco)
+                   Endereço
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Telefone)
