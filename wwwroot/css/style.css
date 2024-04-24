@@ -133,6 +133,7 @@ h2, .h2 {
 @media (min-width: 1200px) {
     h2, .h2 {
         font-size: 2rem;
+        color: #dbae3f;
     }
 }
 
@@ -347,6 +348,7 @@ th, td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    width:15%;
 }
 
 tr:hover {
@@ -409,7 +411,6 @@ button,
     [type=reset]:not(:disabled),
     [type=submit]:not(:disabled) {
         cursor: pointer;
-        background-color: #dbae3f;
     }
 
 ::-moz-focus-inner {
@@ -8879,7 +8880,7 @@ textarea.form-control-lg {
 
 .text-muted {
     --bs-text-opacity: 1;
-    color: #6c757d !important;
+    color: #dbae3f !important;
 }
 
 .text-black-50 {
@@ -12455,6 +12456,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     #sidebarToggle{
         background-color:white;
     }
+    
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
