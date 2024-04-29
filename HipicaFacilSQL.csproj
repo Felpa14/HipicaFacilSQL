@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\css\styles.css" />
+    <Content Remove="wwwroot\img\hipicafacil.png" />
   </ItemGroup>
 
   <ItemGroup>
