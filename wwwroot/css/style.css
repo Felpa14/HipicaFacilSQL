@@ -411,6 +411,7 @@ button,
     [type=reset]:not(:disabled),
     [type=submit]:not(:disabled) {
         cursor: pointer;
+        background-color: #1a1928;
     }
 
 ::-moz-focus-inner {
@@ -510,7 +511,7 @@ progress {
 }
 
 .lead {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 300;
 }
 
@@ -8881,6 +8882,7 @@ textarea.form-control-lg {
 .text-muted {
     --bs-text-opacity: 1;
     color: #dbae3f !important;
+    font-weight: 600;
 }
 
 .text-black-50 {

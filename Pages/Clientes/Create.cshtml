@@ -23,7 +23,7 @@
                 <div class="form-floating">
                     <input type="email" id="email" placeholder=" " maxlength="50" class="form-control" data-inputmask="'alias': 'email'" required asp-for="Cliente.Email" />
                     <label for="email">Email:</label>
-                    <small class="text-muted">ex: "exemplo@exemplo.com.br"</small>
+                    <small class="text-muted">Ex: "exemplo@exemplo.com.br"</small>
                 </div>
             </div>
         </div>
@@ -32,14 +32,14 @@
             <div class="col-sm-6">
                 <div class="form-floating">
                     <input type="text" id="cpf" asp-for="Cliente.Cpf" class="form-control" placeholder=" " maxlength="14" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" oninput="formatarCPF(this)" />
-                    <small class="text-muted">ex: "123.456.789-00"</small>
+                    <small class="text-muted">Ex: "123.456.789-00"</small>
                     <label for="cpf">CPF:</label>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-floating">
                     <input type="text" id="telefone" asp-for="Cliente.Telefone" class="form-control" placeholder=" " maxlength="14" required pattern="\(\d{2}\)\d{5}-\d{4}" oninput="formatarTelefone(this)" />
-                    <small class="text-muted">ex: "(11)98765-4321"</small>
+                    <small class="text-muted">Ex: "(11)98765-4321"</small>
                     <label for="telefone">Telefone:</label>
                 </div>
             </div>
@@ -49,12 +49,39 @@
             <div class="col-sm-12">
                 <div class="form-floating">
                     <input type="text" id="endereco" asp-for="Cliente.Endereco" class="form-control" placeholder=" " />
-                    <small class="text-muted">ex: "rua carlos gomes, 65, atibaia-sp"</small>
+                    <small class="text-muted">Ex: "Rua Águas Claras"</small>
                     <label for="endereco">Endereço:</label>
                 </div>
             </div>
         </div>
         <br />
+        <div class="text-center">
+            <div class="row">
+                <!-- Cidade -->
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" id="cidade" class="form-control" placeholder=" " />
+                        <label for="cidade">Cidade:</label>
+                    </div>
+                </div>
+
+                <!-- Estado -->
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" id="complemento" class="form-control" placeholder=" " />
+                        <label for="complemento">Complemento:</label>
+                    </div>
+                </div>
+
+                <!-- CEP -->
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="inputCEP" placeholder=" ">
+                        <label for="cep">CEP:</label>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-12 ">
                 <button type="submit" value="Create" class="btn btn-primary mt-3">Adicionar Cliente</button>
