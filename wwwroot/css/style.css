@@ -411,7 +411,8 @@ button,
     [type=reset]:not(:disabled),
     [type=submit]:not(:disabled) {
         cursor: pointer;
-        background-color: #1a1928;
+        background-color: #dbae3f;
+        
     }
 
 ::-moz-focus-inner {
@@ -3179,9 +3180,7 @@ textarea.form-control-lg {
 }
 
 .btn:hover {
-    color: var(--bs-btn-hover-color);
-    background-color: var(--bs-btn-hover-bg);
-    border-color: var(--bs-btn-hover-border-color);
+    background-color: #dbae3f;
 }
 
 .btn-check + .btn:hover {
@@ -3217,22 +3216,20 @@ textarea.form-control-lg {
 .btn:disabled, .btn.disabled, fieldset:disabled .btn {
     color: var(--bs-btn-disabled-color);
     pointer-events: none;
-    background-color: var(--bs-btn-disabled-bg);
-    border-color: var(--bs-btn-disabled-border-color);
+    background-color: #dbae3f;
     opacity: var(--bs-btn-disabled-opacity);
 }
 
 .btn-primary {
     --bs-btn-color: #fff;
-    --bs-btn-bg: #0d6efd;
-    --bs-btn-border-color: #0d6efd;
+    --bs-btn-bg: #dbae3f;
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #0b5ed7;
-    --bs-btn-hover-border-color: #0a58ca;
+    --bs-btn-hover-border-color: #1a1928;
     --bs-btn-focus-shadow-rgb: 49, 132, 253;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #0a58ca;
-    --bs-btn-active-border-color: #0a53be;
+    --bs-btn-active-bg: #dbae3f;
+    --bs-btn-active-border-color: #1a1928;
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: #0d6efd;
@@ -5635,7 +5632,7 @@ textarea.form-control-lg {
     }
 
         .list-group-flush > .list-group-item:last-child {
-            border-bottom-width: 0;
+            border-bottom-width: thin;
         }
 
 .list-group-item-primary {
@@ -6579,7 +6576,7 @@ textarea.form-control-lg {
     padding: 0;
     color: #fff;
     text-align: center;
-    background: none;
+    background: none !important;
     border: 0;
     opacity: 0.5;
     transition: opacity 0.15s ease;
