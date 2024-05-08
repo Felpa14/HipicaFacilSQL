@@ -60,7 +60,8 @@
                 <!-- Cidade -->
                 <div class="col-md-4">
                     <div class="form-floating">
-                        <input type="text" id="cidade" class="form-control" placeholder=" " />
+                        <input type="text" id="cidade" asp-for="Cliente.Cidade" class="form-control" placeholder=" " />
+                        <small class="text-muted">Ex: "São Paulo"</small>
                         <label for="cidade">Cidade:</label>
                     </div>
                 </div>
@@ -68,7 +69,8 @@
                 <!-- Estado -->
                 <div class="col-md-4">
                     <div class="form-floating">
-                        <input type="text" id="complemento" class="form-control" placeholder=" " />
+                        <input type="text" id="cidade" asp-for="Cliente.Estado" class="form-control" placeholder=" " />
+                        <small class="text-muted">Ex: "São Paulo"</small>
                         <label for="complemento">Complemento:</label>
                     </div>
                 </div>
@@ -76,10 +78,12 @@
                 <!-- CEP -->
                 <div class="col-md-4">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="inputCEP" placeholder=" ">
+                        <input type="text" id="cidade" asp-for="Cliente.Cep" class="form-control" placeholder=" " maxlength="9" required pattern="\d{5}-\d{3}" oninput="formatarCEP(this)" />
+                        <small class="text-muted">Ex: "12345-300"</small>
                         <label for="cep">CEP:</label>
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="row">
@@ -96,32 +100,40 @@
 @section Scripts {
     <script>
 
-         function formatarCPF(campo) {
-                // Remove tudo que não for número
-                var valor = campo.value.replace(/\D/g, '');
+        function formatarCPF(campo) {
+            // Remove tudo que não for número
+            var valor = campo.value.replace(/\D/g, '');
 
-                // Formata o CPF: xxx.xxx.xxx-xx
-                valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
-                valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
-                valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            // Formata o CPF: xxx.xxx.xxx-xx
+            valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+            valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+            valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
 
-                // Atualiza o valor do campo
-                campo.value = valor;
-            }
+            // Atualiza o valor do campo
+            campo.value = valor;
+        }
 
-            function formatarTelefone(campo) {
-        // Remove tudo que não for número
-        var valor = campo.value.replace(/\D/g, '');
+        function formatarTelefone(campo) {
+            // Remove tudo que não for número
+            var valor = campo.value.replace(/\D/g, '');
 
-        // Formata o telefone: (xx)xxxxx-xxxx
-        valor = valor.replace(/(\d{2})(\d)/, '($1)$2');
-        valor = valor.replace(/(\d{5})(\d)/, '$1-$2');
+            // Formata o telefone: (xx)xxxxx-xxxx
+            valor = valor.replace(/(\d{2})(\d)/, '($1)$2');
+            valor = valor.replace(/(\d{5})(\d)/, '$1-$2');
 
-        // Atualiza o valor do campo
-        campo.value = valor;
-    }
+            // Atualiza o valor do campo
+            campo.value = valor;
+        }
+        function formatarCEP(campo) {
+            var valor = campo.value.replace(/\D/g, '');
+            valor = valor.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+            campo.value = valor;
+        }
 
 
-        </script>
+
+
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+

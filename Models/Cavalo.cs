@@ -9,7 +9,7 @@ namespace HipicaFacilSQL.Models
         public string Raca { get; set; }
         public string Idade { get; set; }
         public string Peso { get; set; }
-        //public string ?Imagem { get; set; }
+        public string? ImagemPath { get; set; }
 
         public ICollection<Navigation> ?Navigations { get; set; }
     }

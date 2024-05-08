@@ -27,6 +27,12 @@ namespace HipicaFacilSQL.Models
         [RegularExpression(@"^\(\d{2}\)\d{5}-\d{4}$", ErrorMessage = "Formato de telefone inválido. Use o formato (00)12345-6789.")]
         public string Telefone { get; set; }
 
+        public string ?Cidade { get; set; }
+
+        public string ?Estado { get; set; }
+
+        public string ?Cep { get; set; }
+
         public ICollection<Navigation> ?Navigations { get; set; }
     }
 }

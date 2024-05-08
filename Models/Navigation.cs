@@ -9,5 +9,7 @@
 
         public Produto Produto { get; set; }
         public Cavalo Cavalo { get; set; }
+        public Financa Financa { get; set; }
+        public Cliente Cliente { get; set; }
     }
 }

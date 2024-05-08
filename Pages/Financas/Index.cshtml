@@ -1,0 +1,164 @@
+﻿@page
+@model HipicaFacilSQL.Pages.Financas.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cadastro de Receita/Despesa</h1>
+
+<p>
+    <a asp-page="Create"> <i class="fa-solid fa-plus"></i> Nova Receita/Despesa</a>
+</p>
+
+@* <form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Encontre pelo Nome:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Pesquisar" class="btn btn-primary" /> |
+            <a asp-page="./Index">Voltar para a tabela</a>
+        </p>
+
+    </div>
+</form> *@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Financa[0].Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Financa[0].Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Financa[0].Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Financa[0].Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Financa[0].Quantidade)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Financa) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+               <a asp-page="./Edit" asp-route-id="@item.ID"><i class="fa-solid fa-pen"></i></a> |
+                <a asp-page="./Details" asp-route-id="@item.ID"><i class="fa-solid fa-magnifying-glass"></i></a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID"><i class="fa-solid fa-trash"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+@* <h1>Cadastro de Estoque</h1>
+<br />
+<p>
+    <a asp-page="Create"> <i class="fa-solid fa-plus"></i> Novo Produto</a>
+</p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Encontre pelo Nome:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Pesquisar" class="btn btn-primary" /> |
+            <a asp-page="./Index">Voltar para a tabela</a>
+        </p>
+
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NomeSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                @Html.DisplayNameFor(model => model.Produtos[0].Nome)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Produtos[0].Validade)
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Produtos[0].Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Produtos[0].Quantidade)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Produtos) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Validade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID"><i class="fa-solid fa-pen"></i></a> |
+                <a asp-page="./Details" asp-route-id="@item.ID"><i class="fa-solid fa-magnifying-glass"></i></a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID"><i class="fa-solid fa-trash"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.Produtos.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Produtos.HasNextPage ? "disabled" : "";
+}
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Produtos.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Anterior
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Produtos.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Próximo
+</a>
+ *@

@@ -11,18 +11,19 @@
 <form method="post">
     <div class="container text-center">
         <div class="row">
-            <input type="hidden" asp-for="Cliente.ID" />
             <div class="col-sm-6">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="nome" placeholder=" " required asp-for="Cliente.Nome" />
+                    <input type="text" class="form-control" id="nome" placeholder=" " maxlength="50" required asp-for="Cliente.Nome" />
                     <label for="nome">Nome:</label>
+                    <small> </small>
                 </div>
             </div>
 
             <div class="col-sm-6">
                 <div class="form-floating">
-                    <input type="email" id="email" asp-for="Cliente.Email" class="form-control" placeholder=" " />
+                    <input type="email" id="email" placeholder=" " maxlength="50" class="form-control" data-inputmask="'alias': 'email'" required asp-for="Cliente.Email" />
                     <label for="email">Email:</label>
+                    <small class="text-muted">Ex: "exemplo@exemplo.com.br"</small>
                 </div>
             </div>
         </div>
@@ -30,15 +31,15 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-floating">
-                    <input type="text" id="cpf" asp-for="Cliente.Cpf" class="form-control" placeholder="Ex: 123.456.789-10" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" oninput="formatarCPF(this)" />
-
+                    <input type="text" id="cpf" asp-for="Cliente.Cpf" class="form-control" placeholder=" " maxlength="14" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" oninput="formatarCPF(this)" />
+                    <small class="text-muted">Ex: "123.456.789-00"</small>
                     <label for="cpf">CPF:</label>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-floating">
-                    <input type="text" id="telefone" asp-for="Cliente.Telefone" class="form-control" placeholder="Ex: (12)34567-8901" required pattern="\(\d{2}\)\d{5}-\d{4}" oninput="formatarTelefone(this)" />
-
+                    <input type="text" id="telefone" asp-for="Cliente.Telefone" class="form-control" placeholder=" " maxlength="14" required pattern="\(\d{2}\)\d{5}-\d{4}" oninput="formatarTelefone(this)" />
+                    <small class="text-muted">Ex: "(11)98765-4321"</small>
                     <label for="telefone">Telefone:</label>
                 </div>
             </div>
@@ -48,23 +49,91 @@
             <div class="col-sm-12">
                 <div class="form-floating">
                     <input type="text" id="endereco" asp-for="Cliente.Endereco" class="form-control" placeholder=" " />
+                    <small class="text-muted">Ex: "Rua Águas Claras"</small>
                     <label for="endereco">Endereço:</label>
                 </div>
             </div>
         </div>
         <br />
+        <div class="text-center">
+            <div class="row">
+                <!-- Cidade -->
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" id="cidade" asp-for="Cliente.Cidade" class="form-control" placeholder=" " />
+                        <small class="text-muted">Ex: "São Paulo"</small>
+                        <label for="cidade">Cidade:</label>
+                    </div>
+                </div>
+
+                <!-- Estado -->
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" id="cidade" asp-for="Cliente.Estado" class="form-control" placeholder=" " />
+                        <small class="text-muted">Ex: "São Paulo"</small>
+                        <label for="complemento">Complemento:</label>
+                    </div>
+                </div>
+
+                <!-- CEP -->
+                <!-- CEP -->
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" id="cidade" asp-for="Cliente.Cep" class="form-control" placeholder=" " maxlength="9" required pattern="\d{5}-\d{3}" oninput="formatarCEP(this)" />
+                        <small class="text-muted">Ex: "12345-300"</small>
+                        <label for="cep">CEP:</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-12 ">
-                <button type="submit" value="Change" class="btn btn-primary mt-3">Editar Cliente</button>
+                <button type="submit" value="Create" class="btn btn-primary mt-3">Adicionar Cliente</button>
             </div>
         </div>
     </div>
 </form>
-
 <div>
-    <a asp-page="./Index"> <i class="fa-solid fa-backward"></i> Voltar para a tabela</a>
+    <a asp-page="Index"><i class="fa-solid fa-backward-step"></i>  Voltar para a Tabela</a>
 </div>
 
 @section Scripts {
+    <script>
+
+        function formatarCPF(campo) {
+            // Remove tudo que não for número
+            var valor = campo.value.replace(/\D/g, '');
+
+            // Formata o CPF: xxx.xxx.xxx-xx
+            valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+            valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+            valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+            // Atualiza o valor do campo
+            campo.value = valor;
+        }
+
+        function formatarTelefone(campo) {
+            // Remove tudo que não for número
+            var valor = campo.value.replace(/\D/g, '');
+
+            // Formata o telefone: (xx)xxxxx-xxxx
+            valor = valor.replace(/(\d{2})(\d)/, '($1)$2');
+            valor = valor.replace(/(\d{5})(\d)/, '$1-$2');
+
+            // Atualiza o valor do campo
+            campo.value = valor;
+        }
+        function formatarCEP(campo) {
+            var valor = campo.value.replace(/\D/g, '');
+            valor = valor.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+            campo.value = valor;
+        }
+
+
+
+
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
