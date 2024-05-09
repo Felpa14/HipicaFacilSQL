@@ -43,6 +43,9 @@ namespace HipicaFacilSQL.Pages.Clientes
                 ModelState.AddModelError("", "Ocorreu um erro ao salvar os dados do cliente.");
                 return Page();
             }
+
+
         }
     }
 }
+
