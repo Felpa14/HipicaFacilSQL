@@ -1,0 +1,79 @@
+﻿@page
+@model HipicaFacilSQL.Pages.Agenda.IndexModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Calendário</h2>
+
+    <div id="calendar"></div>
+
+    <script>
+        function createCalendar(year, month) {
+            var calendarDiv = document.getElementById('calendar');
+            var daysInMonth = new Date(year, month + 1, 0).getDate();
+            var firstDayOfMonth = new Date(year, month, 1).getDay();
+
+            var monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+            var table = '<table><caption>' + monthNames[month] + ' ' + year + '</caption><tr>';
+
+            // Adiciona cabeçalhos de dia da semana
+            for (var i = 0; i < 7; i++) {
+                table += '<th>' + ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'][i] + '</th>';
+            }
+            table += '</tr><tr>';
+
+            // Adiciona dias do mês
+            var day = 1;
+            for (var i = 0; i < 9; i++) { // Loop máximo de 9 linhas no calendário
+                for (var j = 0; j < 7; j++) {
+                    if (day <= daysInMonth && (i > 0 || j >= firstDayOfMonth)) {
+                        table += '<td>' + day + '</td>';
+                        day++;
+                    } else {
+                        table += '<td></td>';
+                    }
+                }
+                if (day > daysInMonth) {
+                    break;
+                } else {
+                    table += '</tr><tr>';
+                }
+            }
+            table += '</tr></table>';
+
+            calendarDiv.innerHTML = table;
+        }
+
+        // Obter a data atual
+        var currentDate = new Date();
+        var currentYear = currentDate.getFullYear();
+        var currentMonth = currentDate.getMonth();
+
+        // Criar o calendário para o mês atual
+        createCalendar(currentYear, currentMonth);
+    </script>
+
+</body>
+</html>

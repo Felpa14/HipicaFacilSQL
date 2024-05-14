@@ -69,15 +69,15 @@
                 <!-- Estado -->
                 <div class="col-md-4">
                     <div class="form-floating">
-                        <input type="text" id="cidade" asp-for="Cliente.Complemento" class="form-control" placeholder=" " />
-                        <small class="text-muted">Ex: "São Paulo"</small>
-                        <label for="complemento">Complemento:</label>
+                        <input type="text" id="complemento" asp-for="Cliente.Complemento" class="form-control" placeholder=" " />
+                        <small class="text-muted">Ex: "469 B"</small>
+                        <label for="estado">Complemento:</label>
                     </div>
                 </div>
                 <!-- CEP -->
                 <div class="col-md-4">
                     <div class="form-floating">
-                        <input type="text" id="cidade" asp-for="Cliente.Cep" class="form-control" placeholder=" " maxlength="9" required pattern="\d{5}-\d{3}" oninput="formatarCEP(this)" />
+                        <input type="text" id="cep" asp-for="Cliente.Cep" class="form-control" placeholder=" " maxlength="9" required pattern="\d{5}-\d{3}" oninput="formatarCEP(this)" />
                         <small class="text-muted">Ex: "12345-300"</small>
                         <label for="cep">CEP:</label>
                     </div>
