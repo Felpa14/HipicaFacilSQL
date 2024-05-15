@@ -3214,14 +3214,14 @@ textarea.form-control-lg {
     }
 
 .btn:disabled, .btn.disabled, fieldset:disabled .btn {
-    color: var(--bs-btn-disabled-color);
+    color: #212529;
     pointer-events: none;
     background-color: #dbae3f;
     opacity: var(--bs-btn-disabled-opacity);
 }
 
 .btn-primary {
-    --bs-btn-color: #fff;
+    --bs-btn-color: #212529;
     --bs-btn-bg: #dbae3f;
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #0b5ed7;
