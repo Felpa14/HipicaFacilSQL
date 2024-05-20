@@ -30,8 +30,8 @@ namespace HipicaFacilSQL.Pages.Cavalos
         [BindProperty]
         public Cavalo Cavalo { get; set; }
         [BindProperty]
-        public IFormFile Imagem { get; set; } // Arquivo de imagem
-        public List<IFormFile> Documentos { get; set; } // Documentos
+        public IFormFile ?Imagem { get; set; } // Arquivo de imagem
+        public List<IFormFile> ?Documentos { get; set; } // Documentos
 
         public async Task<IActionResult> OnPostAsync()
         {
