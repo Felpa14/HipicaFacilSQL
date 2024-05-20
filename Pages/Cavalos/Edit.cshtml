@@ -7,22 +7,27 @@
 
 <h4>Editar Cavalo</h4>
 <hr />
-<form method="post">
+<form method="post" id="cavaloForm" enctype="multipart/form-data">
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-floating">
                     <input type="text" class="form-control" id="nome" placeholder="" maxlength="50" required asp-for="Cavalo.Nome" />
                     <label for="nome">Nome:</label>
+                    <small class="text-muted">Ex: Pangaré</small>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-floating">
                     <select id="raca" asp-for="Cavalo.Raca" class="form-select" required>
                         <option value="">Selecione a Raça</option>
+                        <option value="Árabe">Árabe</option>
+                        <option value="Appaloosa">Appaloosa</option>
+                        <option value="Bretão">Bretão</option>
                         <option value="Brasileiro de Hipismo">Brasileiro de Hipismo</option>
                         <option value="Campeiro">Campeiro</option>
                         <option value="Campolina">Campolina</option>
+                        <option value="Crioulo">Crioulo</option>
                         <option value="Lavradeiro">Lavradeiro</option>
                         <option value="Mangalarga">Mangalarga</option>
                         <option value="Mangalarga Marchador">Mangalarga Marchador</option>
@@ -33,6 +38,9 @@
                         <option value="Pônei Brasileiro">Pônei Brasileiro</option>
                         <option value="Piquira">Piquira</option>
                         <option value="Puruca">Puruca</option>
+                        <option value="Puro-sangue Lusitano">Puro-sangue Lusitano</option>
+                        <option value="Quarto de Milha">Quarto de Milha</option>
+                        <option value="Shire">Shire</option>
                         <option value="SRD">SRD</option>
                     </select>
                     <label for="raca">Raça:</label>
@@ -45,25 +53,29 @@
                 <div class="form-floating">
                     <input type="text" id="peso" asp-for="Cavalo.Peso" class="form-control" placeholder=" " />
                     <label for="peso">Peso:</label>
+                    <small class="text-muted">Ex: 988 kg</small>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-floating">
-                    <input type="date" id="idade" asp-for="Cavalo.Idade" class="form-control" placeholder=" " />
-                    <label for="idade">Data de Nascimento:</label>
+                    <input type="text" id="dataNascimento" asp-for="Cavalo.Idade" class="form-control" placeholder=" " maxlength="10" required pattern="\d{2}/\d{2}/\d{4}" oninput="formatarData(this)" />
+                    <label for="dataNascimento">Data de Nascimento:</label>
+                    <small class="text-muted">Ex: 04/12/2002</small>
                 </div>
             </div>
-            @*
             <div class="form-group col-sm-4">
-            <input type="file" id="imagem" class=" form-control-file" asp-for="Cavalo.Imagem">
-            <label for="exampleFormControlFile1">Anexo de documentos </label>
-            <label for="exampleFormControlFile1">Anexo de documentos</label>
-            >>>>>>> e70c8a25c0f67eba81ea46856c8f7c3084a814a6
-            </div> *@
+                <input type="file" id="imagem" name="imagem" class="form-control-file" />
+                <label for="imagem">Upload de imagem</label>
+            </div>
+            <div class="form-group col-sm-4">
+                <input type="file" id="documentos" name="documentos" class="form-control-file" multiple />
+                <label for="documentos">Upload de documentos</label>
+            </div>
+
             <br />
             <div class="row">
                 <div class="col-sm-12">
-                    <button type="submit" value="Create" class="btn btn-primary mt-3">Editar Cavalo</button>
+                    <button type="submit" value="Create" class="btn btn-primary mt-3">Cadastrar Cavalo</button>
                 </div>
             </div>
         </div>
@@ -71,9 +83,61 @@
 </form>
 
 <div>
-    <a asp-page="./Index"> <i class="fa-solid fa-backward"></i> Voltar para a tabela </a>
+    <a asp-page="Index"><i class="fa-solid fa-backward-step"></i>  Voltar para a Tabela</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Função para adicionar "kg" ao valor inserido no campo de peso
+        function formatarPeso() {
+            var pesoInput = document.getElementById("peso");
+            var pesoValue = pesoInput.value.trim();
+
+            // Verificar se o valor inserido já possui "kg" no final
+            if (!pesoValue.endsWith("kg")) {
+                // Se não tiver "kg", adicionar
+                pesoValue += " kg";
+                pesoInput.value = pesoValue;
+            }
+        }
+
+        // Chamar a função quando o usuário sair do campo de peso
+        document.getElementById("peso").addEventListener("blur", formatarPeso);
+
+        // Função para formatar a data de nascimento
+        function formatarData(campo) {
+            // Remove tudo que não for número
+            var valor = campo.value.replace(/\D/g, '');
+
+            // Formata a data: dd/mm/yyyy
+            valor = valor.replace(/(\d{2})(\d)/, '$1/$2');
+            valor = valor.replace(/(\d{2})(\d)/, '$1/$2');
+            valor = valor.replace(/(\d{4})(\d{1,2})$/, '$1');
+
+            // Atualiza o valor do campo
+            campo.value = valor;
+        }
+
+        // Função para atualizar a idade do cavalo quando a data é alterada
+        document.getElementById("dataNascimento").addEventListener("change", function () {
+            var dataNascimento = this.value;
+            var idade = calcularIdade(dataNascimento);
+            document.getElementById("idadeCavalo").innerText = "Idade do cavalo: " + idade + " anos";
+        });
+
+        // Função para calcular a idade com base na data de nascimento
+        function calcularIdade(dataNascimento) {
+            var hoje = new Date();
+            var nascimento = new Date(dataNascimento.split('/').reverse().join('-'));
+            var idade = hoje.getFullYear() - nascimento.getFullYear();
+            var mes = hoje.getMonth() - nascimento.getMonth();
+            if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+                idade--;
+            }
+            return idade;
+        }
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -41,6 +41,17 @@
         <dd class="col-sm-10">
             <img src="@Model.Cavalo.ImagemPath" alt="Imagem do Cavalo" width="250" />
         </dd>
+        <dt class="col-sm-2">
+            Documentos
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var docPath in @Model.Cavalo.DocumentosPaths)
+            {
+                <a href="@docPath" target="_blank">@System.IO.Path.GetFileName(docPath)</a>
+                <br />
+            }
+        </dd>
+
 
     
     </dl>

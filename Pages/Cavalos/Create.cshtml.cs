@@ -31,6 +31,7 @@ namespace HipicaFacilSQL.Pages.Cavalos
         public Cavalo Cavalo { get; set; }
         [BindProperty]
         public IFormFile Imagem { get; set; } // Arquivo de imagem
+        public List<IFormFile> Documentos { get; set; } // Documentos
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -49,10 +50,24 @@ namespace HipicaFacilSQL.Pages.Cavalos
                 Cavalo.ImagemPath = "/images/" + Imagem.FileName; // Salvar o caminho da imagem
             }
 
+            if (Documentos != null && Documentos.Count > 0)
+            {
+                foreach (var doc in Documentos)
+                {
+                    var docPath = Path.Combine("wwwroot/documents", doc.FileName);
+                    using (var stream = new FileStream(docPath, FileMode.Create))
+                    {
+                        await doc.CopyToAsync(stream);
+                    }
+                    Cavalo.DocumentosPaths.Add("/documents/" + doc.FileName); // Salvar o caminho do documento
+                }
+            }
+
             _context.Cavalos.Add(Cavalo);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
+
     }
 }
