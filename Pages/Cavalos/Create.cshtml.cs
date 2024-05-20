@@ -29,12 +29,24 @@ namespace HipicaFacilSQL.Pages.Cavalos
 
         [BindProperty]
         public Cavalo Cavalo { get; set; }
+        [BindProperty]
+        public IFormFile Imagem { get; set; } // Arquivo de imagem
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            if (Imagem != null)
+            {
+                var filePath = Path.Combine("wwwroot/images", Imagem.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await Imagem.CopyToAsync(stream);
+                }
+                Cavalo.ImagemPath = "/images/" + Imagem.FileName; // Salvar o caminho da imagem
             }
 
             _context.Cavalos.Add(Cavalo);
