@@ -30,7 +30,7 @@ namespace HipicaFacilSQL.Pages.Cavalos
                 return NotFound();
             }
 
-            var cavalo =  await _context.Cavalos.FirstOrDefaultAsync(m => m.ID == id);
+            var cavalo = await _context.Cavalos.FirstOrDefaultAsync(m => m.ID == id);
             if (cavalo == null)
             {
                 return NotFound();
