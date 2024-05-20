@@ -18,6 +18,7 @@ namespace HipicaFacilSQL.Data
         public DbSet<HipicaFacilSQL.Models.Cavalo> Cavalos { get; set; } = default!;
         public DbSet<HipicaFacilSQL.Models.Produto> Produtos { get; set; } = default!;
         public DbSet<HipicaFacilSQL.Models.Financa> Financas { get; set; } = default!;
+        public DbSet<HipicaFacilSQL.Models.Evento> Eventos { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,7 @@ namespace HipicaFacilSQL.Data
             modelBuilder.Entity<Cavalo>().ToTable("Cavalo");
             modelBuilder.Entity<Produto>().ToTable("Produto");
             modelBuilder.Entity<Financa>().ToTable("Financa");
+            modelBuilder.Entity<Evento>().ToTable("Evento");
 
         }
     }

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HipicaFacilSQL.style.css" asp-append-version="true" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.9.0/main.min.css" rel="stylesheet" />
+
 
 </head>
 <body>
@@ -23,7 +25,7 @@
                 <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Cavalos/Index"><i class="fas fa-horse"></i> Cavalos</a>
                 <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Produtos/Index"><i class="fas fa-box"></i> Estoque</a>
                 <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Financas/Index"><i class="fas fa-money-bill"></i> Finanças</a>
-                <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Agenda/Index"><i class="fas fa-calendar-alt"></i> Agenda</a>
+                <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Eventos/Index"><i class="fas fa-calendar-alt"></i> Agenda</a>
                 <a class=" list-group-item list-group-item-action  p-3" asp-area="" asp-page="/Dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
             </div>
         </div>
@@ -67,6 +69,8 @@
 
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="jQuery.weightMask.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.9.0/main.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
