@@ -15,6 +15,7 @@
                 <div class="form-floating">
                     <input type="text" class="form-control" id="nome" placeholder="" required asp-for="Produto.Nome" />
                     <label for="nome">Nome:</label>
+                    <small class="text-muted">Ex: Feno</small>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -34,18 +35,21 @@
                 <div class="form-floating">
                     <input type="text" id="descricao" asp-for="Produto.Descricao" class="form-control" placeholder=" " />
                     <label for="descricao">Descrição:</label>
+                    <small class="text-muted">Ex: Ração do cavalo</small>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-floating">
-                    <input type="date" id="idade" asp-for="Produto.Validade" class="form-control" placeholder=" " />
-                    <label for="validade">Validade:</label>
+                <input type="text" id="data" asp-for="Produto.Validade" class="form-control" placeholder=" " maxlength="10" required pattern="\d{2}/\d{2}/\d{4}" oninput="formatarData(this)" />
+                <label for="data">Validade:</label>
+                <small class="text-muted">Ex: 04/10/2032</small>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-floating">
                     <input type="number" id="quantidade" asp-for="Produto.Quantidade" class="form-control" placeholder=" " />
                     <label for="Quantidade">Quantidade:</label>
+                    <small class="text-muted">Ex: 5</small>
                 </div>
             </div>
             <br />
@@ -92,5 +96,20 @@
 </div>
  *@
 @section Scripts {
+    <script>
+        // Função para formatar a data de nascimento
+        function formatarData(campo) {
+            // Remove tudo que não for número
+            var valor = campo.value.replace(/\D/g, '');
+
+            // Formata a data: dd/mm/yyyy
+            valor = valor.replace(/(\d{2})(\d)/, '$1/$2');
+            valor = valor.replace(/(\d{2})(\d)/, '$1/$2');
+            valor = valor.replace(/(\d{4})(\d{1,2})$/, '$1');
+
+            // Atualiza o valor do campo
+            campo.value = valor;
+        }
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

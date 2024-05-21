@@ -412,7 +412,7 @@ button,
     [type=submit]:not(:disabled) {
         cursor: pointer;
         background-color: #dbae3f;
-        
+        color: black;
     }
 
 ::-moz-focus-inner {

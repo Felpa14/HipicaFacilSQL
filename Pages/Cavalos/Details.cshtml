@@ -8,7 +8,6 @@
 <h1>Detalhes do Cavalo</h1>
 
 <div>
-    <h4>Cavalo</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -61,7 +60,7 @@
 
 <div>
     <a asp-page="./Index"><i class="fa-solid fa-backward-step"></i> Voltar para a tabela </a> |
-    <a asp-page="./Edit" asp-route-id="@Model.Cavalo.ID"><i class="fa-solid fa-pen"></i>Editar Cavalo</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.Cavalo.ID"><i class="fa-solid fa-pen"></i>Editar Cavalo</a> 
    
 </div>
 
@@ -69,5 +68,5 @@
 <h4>QR Code para esta página</h4>
 @if (Model.QRCodeBytes != null)
 {
-    <img src = "data:image/png;base64,@(Convert.ToBase64String(Model.QRCodeBytes))" alt = "QR Code" />
+    <img class="justify-content-center" src = "data:image/png;base64,@(Convert.ToBase64String(Model.QRCodeBytes))" alt = "QR Code" />
 }
