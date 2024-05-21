@@ -1,0 +1,25 @@
+﻿@page
+@model HipicaFacilSQL.Pages.Agenda.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div id="calendar"></div>
+
+@section Scripts {
+    <script src="~/fullcalendar-6.1.11/fullcalendar-6.1.11/dist/index.global.js"></script>
+       <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            locale: "pt-br",
+            selectable: true
+        });
+        calendar.render();
+      });
+    </script>
+}

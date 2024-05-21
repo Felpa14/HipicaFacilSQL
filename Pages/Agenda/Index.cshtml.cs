@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HipicaFacilSQL.Data;
 using HipicaFacilSQL.Models;
 
-namespace HipicaFacilSQL.Pages.Agendas
+namespace HipicaFacilSQL.Pages.Agenda
 {
     public class IndexModel : PageModel
     {
@@ -23,7 +23,7 @@ namespace HipicaFacilSQL.Pages.Agendas
 
         public async Task OnGetAsync()
         {
-            Evento = await _context.Eventos.ToListAsync();
+            Evento = await _context.Agenda.ToListAsync();
         }
     }
 }

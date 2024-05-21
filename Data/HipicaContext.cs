@@ -18,7 +18,7 @@ namespace HipicaFacilSQL.Data
         public DbSet<HipicaFacilSQL.Models.Cavalo> Cavalos { get; set; } = default!;
         public DbSet<HipicaFacilSQL.Models.Produto> Produtos { get; set; } = default!;
         public DbSet<HipicaFacilSQL.Models.Financa> Financas { get; set; } = default!;
-        public DbSet<HipicaFacilSQL.Models.Evento> Eventos { get; set; } = default!;
+        public DbSet<HipicaFacilSQL.Models.Evento> Agenda { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -8,18 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using HipicaFacilSQL.Data;
 using HipicaFacilSQL.Models;
 
-namespace HipicaFacilSQL.Pages.Agendas
+namespace HipicaFacilSQL.Pages.Agenda
 {
-    public class DeleteModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly HipicaFacilSQL.Data.HipicaContext _context;
 
-        public DeleteModel(HipicaFacilSQL.Data.HipicaContext context)
+        public DetailsModel(HipicaFacilSQL.Data.HipicaContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
         public Evento Evento { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -29,8 +28,7 @@ namespace HipicaFacilSQL.Pages.Agendas
                 return NotFound();
             }
 
-            var evento = await _context.Eventos.FirstOrDefaultAsync(m => m.ID == id);
-
+            var evento = await _context.Agenda.FirstOrDefaultAsync(m => m.ID == id);
             if (evento == null)
             {
                 return NotFound();
@@ -40,24 +38,6 @@ namespace HipicaFacilSQL.Pages.Agendas
                 Evento = evento;
             }
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var evento = await _context.Eventos.FindAsync(id);
-            if (evento != null)
-            {
-                Evento = evento;
-                _context.Eventos.Remove(Evento);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
         }
     }
 }

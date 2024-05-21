@@ -7,10 +7,12 @@
         public int CavaloID { get; set; }
         public int ProdutoID { get; set; }
         public int FinancaID { get; set; }
+        public int EventID { get; set; }
 
         public Produto Produto { get; set; }
         public Cavalo Cavalo { get; set; }
         public Financa Financa { get; set; }
         public Cliente Cliente { get; set; }
+        public Evento Event { get; set; }
     }
 }

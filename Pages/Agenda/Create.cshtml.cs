@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using HipicaFacilSQL.Data;
 using HipicaFacilSQL.Models;
 
-namespace HipicaFacilSQL.Pages.Agendas
+namespace HipicaFacilSQL.Pages.Agenda
 {
     public class CreateModel : PageModel
     {
@@ -35,7 +35,7 @@ namespace HipicaFacilSQL.Pages.Agendas
                 return Page();
             }
 
-            _context.Eventos.Add(Evento);
+            _context.Agenda.Add(Evento);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
