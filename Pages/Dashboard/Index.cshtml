@@ -1,0 +1,51 @@
+﻿@page
+@model HipicaFacilSQL.Pages.Dashboard.IndexModel
+@{
+}
+<canvas id="myChart" width="400" height="200"></canvas>
+
+<h4> Dashboard</h4>
+@section Scripts {
+    <script>
+        // Dados de exemplo (substitua isso pelos seus dados reais)
+        var despesaData = [100, 150, 200, 250];
+        var receitaData = [200, 250, 300, 350];
+        var labels = ["Janeiro", "Fevereiro", "Março", "Abril"];
+
+
+
+        // Inicialização do gráfico
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Despesa',
+                    data: despesaData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'Receita',
+                    data: receitaData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
