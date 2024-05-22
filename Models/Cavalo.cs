@@ -10,6 +10,7 @@ namespace HipicaFacilSQL.Models
         public string Raca { get; set; }
         public string Idade { get; set; }
         public string Peso { get; set; }
+        public string Proprietario { get; set; }
         public string ?ImagemPath { get; set; } // Caminho da imagem
         public List<string> ?DocumentosPaths { get; set; } = new List<string>(); // Caminhos dos documentos
 

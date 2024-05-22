@@ -49,7 +49,8 @@ namespace HipicaFacilSQL.Pages.Cavalos
             string textToEncode = $"Nome: {cavalo.Nome}\n" +
                 $"Raça: {cavalo.Raca}\n" +
                 $"Peso: {cavalo.Peso}\n" +
-                $"Data de Nascimento: {cavalo.Idade}";
+                $"Data de Nascimento: {cavalo.Idade}\n"+
+                $"Proprietario: {cavalo.Proprietario}";
 
 
 
@@ -59,8 +60,8 @@ namespace HipicaFacilSQL.Pages.Cavalos
                 Options = new QrCodeEncodingOptions
                 {
                     CharacterSet = "UTF-8", // Definindo a codificação como UTF-8
-                    Height = 300,
-                    Width = 300
+                    Height = 200,
+                    Width = 200
                 }
             };
 

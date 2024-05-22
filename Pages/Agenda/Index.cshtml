@@ -1,4 +1,5 @@
-﻿@page
+﻿
+@page
 @model HipicaFacilSQL.Pages.Agenda.IndexModel
 
 @{
@@ -7,19 +8,96 @@
 
 <h1>Index</h1>
 
+
+<button type="button" id="btnOpenForm">Novo Evento</button>
+
+<div id="modalCreateEvent" style="display: none;">
+<form id="formCreateEvent" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="NovoEvento.Title" class="control-label"></label>
+        <input asp-for="NovoEvento.Title" class="form-control" id="eventTitle" />
+        <span asp-validation-for="NovoEvento.Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NovoEvento.Start" class="control-label"></label>
+        <input asp-for="NovoEvento.Start" class="form-control" id="eventStart" />
+        <span asp-validation-for="NovoEvento.Start" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NovoEvento.End" class="control-label"></label>
+        <input asp-for="NovoEvento.End" class="form-control" id="eventEnd" />
+        <span asp-validation-for="NovoEvento.End" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+</div>
+
+
+
 <div id="calendar"></div>
 
 @section Scripts {
     <script src="~/fullcalendar-6.1.11/fullcalendar-6.1.11/dist/index.global.js"></script>
-       <script>
+    <script>
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            locale: "pt-br",
-            selectable: true
+        // script.js
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                // configurações do calendário...
+            });
+
+            calendar.render();
+
+            // Abrir o modal para criar evento quando o botão é clicado
+            document.getElementById('btnOpenForm').addEventListener('click', function () {
+                document.getElementById('modalCreateEvent').style.display = 'block';
+            });
+
+            // Submeter o formulário de criação de evento
+            document.getElementById('formCreateEvent').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                var title = document.getElementById('eventTitle').value;
+                var start = document.getElementById('eventStart').value;
+                var end = document.getElementById('eventEnd').value;
+
+                // Adicionar o evento ao calendário
+                calendar.addEvent({
+                    title: title,
+                    start: start,
+                    end: end
+                });
+
+                // Fechar o modal após a submissão
+                document.getElementById('modalCreateEvent').style.display = 'none';
+
+                // Enviar o evento para o servidor via AJAX
+                $.ajax({
+                    url: '/api/Eventos/Create',
+                    method: 'POST',
+                    data: {
+                        title: title,
+                        start: start,
+                        end: end
+                    },
+                    success: function (response) {
+                        // Se necessário, manipule a resposta do servidor aqui
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
         });
-        calendar.render();
-      });
+
     </script>
 }
+@Html.AntiForgeryToken()
+
+@Html.AntiForgeryToken()  

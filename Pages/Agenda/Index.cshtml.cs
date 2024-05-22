@@ -19,7 +19,22 @@ namespace HipicaFacilSQL.Pages.Agenda
             _context = context;
         }
 
-        public IList<Evento> Evento { get;set; } = default!;
+        public IList<Evento> Evento { get; set; } = default!;
+
+        public Evento NovoEvento { get; set; }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            _context.Agenda.Add(NovoEvento);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
+        }
 
         public async Task OnGetAsync()
         {
