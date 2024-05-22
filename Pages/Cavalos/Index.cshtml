@@ -32,6 +32,12 @@
                 </a>
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.PropSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                @Html.DisplayNameFor(model => model.Cavalos[0].Proprietario)
+                </a>
+            </th>
+            <th>
                 Raça
             </th>
             <th>
@@ -50,7 +56,10 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                    @Html.DisplayFor(modelItem => item.Raca)
+                @Html.DisplayFor(modelItem => item.Proprietario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Raca)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Idade)

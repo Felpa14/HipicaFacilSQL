@@ -24,6 +24,7 @@ namespace HipicaFacilSQL.Pages.Cavalos
         public string NomeSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
+        public string PropSort { get; set; }
 
         public PaginatedList<Cavalo> Cavalos { get; set; }
 
@@ -35,6 +36,7 @@ namespace HipicaFacilSQL.Pages.Cavalos
             // using System;
             CurrentSort = sortOrder;
             NomeSort = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
+            PropSort = String.IsNullOrEmpty(sortOrder) ? "prop_desc" : "";
             if (searchString != null)
             {
                 pageIndex = 1;
@@ -58,9 +60,13 @@ namespace HipicaFacilSQL.Pages.Cavalos
             {
                 case "nome_desc":
                     cavalosIQ = cavalosIQ.OrderByDescending(c => c.Nome);
-                    break;;
+                    break; ;
+                case "prop_desc":
+                    cavalosIQ = cavalosIQ.OrderByDescending(c => c.Proprietario);
+                    break; ;
                 default:
                     cavalosIQ = cavalosIQ.OrderBy(c => c.Nome);
+                    cavalosIQ = cavalosIQ.OrderBy(c => c.Proprietario);
                     break;
             }
             var pageSize = Configuration.GetValue("PageSize", 4);
