@@ -68,5 +68,5 @@
 <h4>QR Code para esta página</h4>
 @if (Model.QRCodeBytes != null)
 {
-    <img class="justify-content-center" src = "data:image/png;base64,@(Convert.ToBase64String(Model.QRCodeBytes))" alt = "QR Code" />
+    <img class="rounded mx-auto d-block" src = "data:image/png;base64,@(Convert.ToBase64String(Model.QRCodeBytes))" alt = "QR Code" />
 }
