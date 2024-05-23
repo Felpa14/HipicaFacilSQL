@@ -46,6 +46,38 @@
         </div>
         <br />
         <div class="row">
+            <div class="col-md-3">
+                <div class="form-floating">
+                        <input type="text" id="cep" asp-for="Cliente.Cep" class="form-control" placeholder=" " maxlength="9" required pattern="\d{5}-\d{3}" oninput="formatarCEP(this)" />
+                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="right" title="O seu endereço será puxado automaticamente. Modifique ou adicione informações se necessário."></i>
+                        <small class="text-muted">Ex: "12345-300"</small>
+                        <label for="cep">CEP:</label>
+                </div>
+             </div>
+             <div class="col-md-3">
+                <div class="form-floating">
+                        <input type="text" id="complemento" asp-for="Cliente.Complemento" class="form-control" placeholder=" " />
+                        <small class="text-muted">Ex: "469 B"</small>
+                        <label for="complemento">Complemento:</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating">
+                    <input type="text" id="cidade" asp-for="Cliente.Cidade" class="form-control" placeholder=" " />
+                    <small class="text-muted">Ex: "São Paulo"</small>
+                    <label for="cidade">Cidade:</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating">
+                        <input type="text" id="bairro" asp-for="Cliente.Bairro" class="form-control" placeholder=" " />
+                        <small class="text-muted">Ex: "Loanda"</small>
+                        <label for="bairro">Bairro:</label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
             <div class="col-sm-12">
                 <div class="form-floating">
                     <input type="text" id="endereco" asp-for="Cliente.Endereco" class="form-control" placeholder=" " />
@@ -55,36 +87,7 @@
             </div>
         </div>
         <br />
-        <div class="text-center">
-            <div class="row">
-                <!-- Cidade -->
-                <div class="col-md-4">
-                    <div class="form-floating">
-                        <input type="text" id="cidade" asp-for="Cliente.Cidade" class="form-control" placeholder=" " />
-                        <small class="text-muted">Ex: "São Paulo"</small>
-                        <label for="cidade">Cidade:</label>
-                    </div>
-                </div>
 
-                <!-- Estado -->
-                <div class="col-md-4">
-                    <div class="form-floating">
-                        <input type="text" id="complemento" asp-for="Cliente.Complemento" class="form-control" placeholder=" " />
-                        <small class="text-muted">Ex: "469 B"</small>
-                        <label for="estado">Complemento:</label>
-                    </div>
-                </div>
-                <!-- CEP -->
-                <div class="col-md-4">
-                    <div class="form-floating">
-                        <input type="text" id="cep" asp-for="Cliente.Cep" class="form-control" placeholder=" " maxlength="9" required pattern="\d{5}-\d{3}" oninput="formatarCEP(this)" />
-                        <small class="text-muted">Ex: "12345-300"</small>
-                        <label for="cep">CEP:</label>
-                    </div>
-                </div>
-
-            </div>
-        </div>
         <div class="row">
             <div class="col-sm-12 ">
                 <button type="submit" value="Create" class="btn mt-3">Adicionar Cliente</button>
@@ -98,6 +101,32 @@
 
 @section Scripts {
     <script>
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        document.getElementById('cep').addEventListener('blur', async function () {
+            var cep = this.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                try {
+                    var response = await fetch(`/Clientes/Create?handler=Endereco&cep=${cep}`);
+                    if (response.ok) {
+                        var endereco = await response.json();
+                        console.log(endereco); // Verifique os dados do endereço no console
+                        document.getElementById('endereco').value = endereco.logradouro;
+                        document.getElementById('cidade').value = endereco.localidade;
+                        document.getElementById('complemento').value = endereco.complemento;
+                        document.getElementById('bairro').value = endereco.bairro;
+                        // Preencha os outros campos do endereço conforme necessário
+                    } else {
+                        console.error('Erro ao buscar CEP:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Erro ao buscar CEP:', error);
+                }
+            }
+        });
 
         function formatarCPF(campo) {
             // Remove tudo que não for número

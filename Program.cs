@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using HipicaFacilSQL.Data;
+using HipicaFacilSQL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,11 @@ builder.Services.AddDbContext<HipicaContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+
+//REST API CARAIOOO
+builder.Services.AddRazorPages();
+builder.Services.AddHttpClient<ViaCEPService>();
+builder.Services.AddControllersWithViews();
 
 // Adicione o suporte a controllers
 builder.Services.AddControllers();
@@ -41,9 +47,21 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// Adicione a rota de API
+
 app.MapControllers();
 
 app.MapRazorPages();
 
 app.Run();
+
+// Adicione a rota de API
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins",
+        builder =>
+        {
+            builder.WithOrigins("https://viacep.com.br/ws/01001000/json/?callback=callback_name")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});

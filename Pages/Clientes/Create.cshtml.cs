@@ -1,19 +1,22 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using HipicaFacilSQL.Data;
-using Microsoft.Extensions.Configuration;
 using HipicaFacilSQL.Models;
+using HipicaFacilSQL.Services;
 
 namespace HipicaFacilSQL.Pages.Clientes
 {
     public class CreateModel : PageModel
     {
-        private readonly HipicaFacilSQL.Data.HipicaContext _context;
+        private readonly HipicaContext _context;
+        private readonly ViaCEPService _viaCEPService;
 
-        public CreateModel(HipicaFacilSQL.Data.HipicaContext context)
+        public CreateModel(HipicaContext context, ViaCEPService viaCEPService)
         {
             _context = context;
+            _viaCEPService = viaCEPService;
         }
 
         public IActionResult OnGet()
@@ -43,9 +46,20 @@ namespace HipicaFacilSQL.Pages.Clientes
                 ModelState.AddModelError("", "Ocorreu um erro ao salvar os dados do cliente.");
                 return Page();
             }
+        }
 
-
+        public async Task<IActionResult> OnGetEnderecoAsync(string cep)
+        {
+            try
+            {
+                var endereco = await _viaCEPService.ConsultarCEP(cep);
+                return new JsonResult(endereco);
+            }
+            catch (Exception ex)
+            {
+                // Registre ou manipule a exceção conforme necessário.
+                return NotFound();
+            }
         }
     }
 }
-
