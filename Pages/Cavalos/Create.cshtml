@@ -67,19 +67,32 @@
             <div class="col-sm-4">
                 <div class="form-floating">
                     <input type="text" id="proprietario" asp-for="Cavalo.Proprietario" class="form-control" placeholder=" " />
-                    <label for="proprietario">Proprietario</label>
+                    <label for="proprietario">Proprietário:</label>
                     <small class="text-muted">Ex: Hipica J.V</small>
                 </div>
             </div>
-            <div class="form-group col-sm-4">
-                <input type="file" id="imagem" name="imagem" class="form-control-file" />
-                <label for="imagem">Upload de imagem</label>
+        </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>
+                    <fieldset class="border p-4 rounded">
+                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="right" title="Escolha uma imagem do cavalo para upload. Formatos suportados: jpg, png, gif."></i>
+                        <label for="imagem" class="form-label">Selecione a Imagem:</label>
+                        <input type="file" id="imagem" name="imagem" class="form-control" />
+                    </fieldset>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div>
+                    <fieldset class="border p-4 rounded">
+                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="right" title="Faça upload de documentos relacionados ao cavalo. Você pode selecionar múltiplos arquivos."></i>
+                        <label for="documentos" class="form-label">Selecione o(s) Documento(os):</label>
+                        <input type="file" id="documentos" name="documentos" class="form-control" multiple />
+                        </fieldset>
+                    </div>
+                </div>
             </div>
-            <div class="form-group col-sm-4">
-                <input type="file" id="documentos" name="documentos" class="form-control-file" multiple />
-                <label for="documentos">Upload de documentos</label>
-            </div>
-
+        <br />
             <br />
             <div class="row">
                 <div class="col-sm-12">
@@ -87,7 +100,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </form>
 
 <div>
@@ -96,6 +108,9 @@
 
 @section Scripts {
     <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
         // Função para adicionar "kg" ao valor inserido no campo de peso
         function formatarPeso() {
             var pesoInput = document.getElementById("peso");

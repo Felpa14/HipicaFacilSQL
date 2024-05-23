@@ -71,23 +71,42 @@
                     <small class="text-muted">Ex: Hipica J.V</small>
                 </div>
             </div>
-            <div class="form-group col-sm-4">
-                <input type="file" id="imagem" name="imagem" class="form-control-file" />
-                <label for="imagem">Upload de imagem</label>
-            </div>
-            <div class="form-group col-sm-4">
-                <input type="file" id="documentos" name="documentos" class="form-control-file" multiple />
-                <label for="documentos">Upload de documentos</label>
-            </div>
-
-            <br />
-            <div class="row">
-                <div class="col-sm-12">
-                    <button type="submit" value="Create" class="btn btn-primary mt-3">Cadastrar Cavalo</button>
+        </div>
+        <div class="row">
+                <div class="col-sm-6">
+                    <fieldset class="border p-4 rounded">
+                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="right" title="Escolha uma imagem do cavalo para upload. Formatos suportados: jpg, png, gif."></i>
+                        <label for="imagem" class="form-label">Selecione a Imagem:</label>
+                        <input type="file" id="imagem" name="imagem" class="form-control" />
+                    </fieldset>
+                </div>
+            <div class="col-sm-6">
+                <div>
+                    <fieldset class="border p-4 rounded">
+                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="right" title="Faça upload de documentos relacionados ao cavalo. Você pode selecionar múltiplos arquivos."></i>
+                        <label for="documentos" class="form-label">Selecione o(s) Documento(os):</label>
+                        <input type="file" id="documentos" name="documentos" class="form-control" multiple />
+                    </fieldset>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <img src="@Model.Cavalo.ImagemPath" alt="" style="max-width: 250px;" value="@Model.Cavalo.ImagemPath" id="imageUrl" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <button type="button" onclick="excluirImagem()" class="btn btn-primary mt-1">Excluir Imagem</button>
+            </div>
+        </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="submit" value="Create" class="btn btn-primary mt-3">Editar Cavalo</button>
+                </div>
+            </div>
+        </div>
 </form>
 
 <div>
@@ -96,6 +115,14 @@
 
 @section Scripts {
     <script>
+        function excluirImagem() {
+            // Limpa o valor do campo de texto
+            document.getElementById('imageUrl').value = '';
+            // Você pode adicionar aqui lógica adicional para processar a exclusão da imagem
+        }
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
         // Função para adicionar "kg" ao valor inserido no campo de peso
         function formatarPeso() {
             var pesoInput = document.getElementById("peso");
