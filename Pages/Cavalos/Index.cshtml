@@ -19,22 +19,21 @@
             <input type="submit" value="Pesquisar" class="btn btn-primary" /> |
             <a asp-page="./Index">Voltar para a tabela</a>
         </p>
-
     </div>
 </form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.NomeSort"
-                   asp-route-currentFilter="@Model.CurrentFilter">
-                @Html.DisplayNameFor(model => model.Cavalos[0].Nome)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NomeSort" asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Cavalos[0].Nome)
+                    <i class="fa fa-sort-alpha-asc"></i>
                 </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.PropSort"
-                   asp-route-currentFilter="@Model.CurrentFilter">
-                @Html.DisplayNameFor(model => model.Cavalos[0].Proprietario)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.PropSort" asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Cavalos[0].Proprietario)
+                    <i class="fa fa-sort-alpha-asc"></i>
                 </a>
             </th>
             <th>
@@ -50,30 +49,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Cavalos) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Proprietario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Raca)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Idade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Peso)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID"><i class="fa-solid fa-pen"></i></a> |
-                <a asp-page="./Details" asp-route-id="@item.ID"><i class="fa-solid fa-magnifying-glass"></i></a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID"><i class="fa-solid fa-trash"></i></a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Cavalos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proprietario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Raca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Idade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Peso)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID"><i class="fa-solid fa-pen"></i></a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID"><i class="fa-solid fa-magnifying-glass"></i></a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID"><i class="fa-solid fa-trash"></i></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 

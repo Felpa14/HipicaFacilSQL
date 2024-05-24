@@ -49,6 +49,9 @@
             <div class="col-md-3">
                 <div class="form-floating">
                         <input type="text" id="cep" asp-for="Cliente.Cep" class="form-control" placeholder=" " maxlength="9" required pattern="\d{5}-\d{3}" oninput="formatarCEP(this)" />
+                    <div id="loading-icon" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
                         <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="right" title="O seu endereço será puxado automaticamente. Modifique ou adicione informações se necessário."></i>
                         <small class="text-muted">Ex: "12345-300"</small>
                         <label for="cep">CEP:</label>
@@ -101,6 +104,33 @@
 
 @section Scripts {
     <script>
+        document.getElementById('cep').addEventListener('blur', async function () {
+            // Mostra o ícone de espera
+            document.getElementById('loading-icon').style.display = 'block';
+
+            var cep = this.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                try {
+                    var response = await fetch(`/Clientes/Create?handler=Endereco&cep=${cep}`);
+                    if (response.ok) {
+                        var endereco = await response.json();
+                        console.log(endereco); // Verifique os dados do endereço no console
+                        document.getElementById('endereco').value = endereco.logradouro;
+                        document.getElementById('cidade').value = endereco.localidade;
+                        document.getElementById('complemento').value = endereco.complemento;
+                        document.getElementById('bairro').value = endereco.bairro;
+                        // Preencha os outros campos do endereço conforme necessário
+                    } else {
+                        console.error('Erro ao buscar CEP:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Erro ao buscar CEP:', error);
+                } finally {
+                    // Oculta o ícone de espera, tanto em caso de sucesso quanto em caso de erro
+                    document.getElementById('loading-icon').style.display = 'none';
+                }
+            }
+        });
 
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();

@@ -27,16 +27,17 @@
     <thead>
         <tr>
             <th>
-
                 <a asp-page="./Index" asp-route-sortOrder="@Model.NomeSort"
                    asp-route-currentFilter="@Model.CurrentFilter">
                     @Html.DisplayNameFor(model => model.Clientes[0].Nome)
-                </a>
+                    <i class="fa fa-sort-alpha-asc"></i>
+                </a>            
             </th>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.CpfSort"
                    asp-route-currentFilter="@Model.CurrentFilter">
                 CPF
+                    <i class="fas fa-sort-alpha-down"></i>
                 </a>
             </th>
             <th>
