@@ -5,8 +5,10 @@
     ViewData["Title"] = "Edit";
 }
 
-<h4>Editar Cavalo</h4>
+<h1 class="fs-2"><i class="fa-solid fa-pen-to-square"></i>&ensp;Editar Cavalo</h1>
 <hr />
+<br />
+
 <form method="post" id="cavaloForm" enctype="multipart/form-data">
     <input type="hidden" asp-for="Cavalo.ID" /> @*NAO DELETA, SENAO O CODIGO QUEBRA*@
     <div class="container text-center">
@@ -103,7 +105,7 @@
             <br />
             <div class="row">
                 <div class="col-sm-12">
-                    <button type="submit" value="Create" class="btn btn-primary mt-3">Editar Cavalo</button>
+                <button type="submit" value="Create" class="btn btn-primary mt-3">Atualizar</button>
                 </div>
             </div>
         </div>

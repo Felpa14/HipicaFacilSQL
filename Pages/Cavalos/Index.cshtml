@@ -5,16 +5,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Cadastro de Cavalos</h1>
+<h1 class="fs-2"><i class="fas fa-horse"></i>&ensp;Cavalos</h1>
+<hr />
 <br />
+
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <p>
-            <a asp-page="Create"> <i class="fa-solid fa-circle-plus fa-lg" style="color:green" align="right"></i>&ensp;Novo Cavalo&ensp;</a>
+            <a asp-page="Create"> <i id="iconeAdd" class=" fa-solid fa-circle-plus fa-lg" style="color:green" align="right"></i>&ensp;Novo Cavalo&ensp;</a>
             | &ensp;Encontre pelo Nome:&ensp;
             <input type="text" name="SearchString" style="border-radius:5px" value="@Model.CurrentFilter" />&ensp;
             <input type="submit" value="Pesquisar" class="btn btn-primary" />&ensp; |
-            <a asp-page="./Index">&ensp;Voltar para a tabela</a>&ensp;&ensp;&ensp;&ensp;
+            <a asp-page="./Index"><i id="iconeAtt" class="fa-solid fa-rotate-right"></i>&ensp;Atualizar página</a>&ensp;&ensp;&ensp;&ensp;
         </p>
     </div>
 </form>
@@ -65,7 +67,7 @@
                     @Html.DisplayFor(modelItem => item.Peso)
                 </td>
                 <td class="text-center">
-                    <a asp-page="./Edit" asp-route-id="@item.ID"><i class="fa-solid fa-pen"></i></a> |
+                    <a asp-page="./Edit" asp-route-id="@item.ID"><i class="fas fa-pencil fa-fw"></i></a> |
                     <a asp-page="./Details" asp-route-id="@item.ID"><i class="fa-solid fa-magnifying-glass"></i></a> |
                     <a asp-page="./Delete" asp-route-id="@item.ID"><i class="fa-solid fa-trash"></i></a>
                 </td>
@@ -78,17 +80,10 @@
     var prevDisabled = !Model.Cavalos.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.Cavalos.HasNextPage ? "disabled" : "";
 }
-<a asp-page="./Index"
-   asp-route-sortOrder="@Model.CurrentSort"
-   asp-route-pageIndex="@(Model.Cavalos.PageIndex - 1)"
-   asp-route-currentFilter="@Model.CurrentFilter"
-   class="btn btn-primary @prevDisabled">
-    Anterior
+<a asp-page="./Index" asp-route-sortOrder="@Model.CurrentSort" asp-route-pageIndex="@(Model.Cavalos.PageIndex - 1)" asp-route-currentFilter="@Model.CurrentFilter" class="btn btn-primary @prevDisabled" style="color: #dbae3f">
+    <i class="fa-solid fa-arrow-left fa-fw" style="color:black" title="Voltar"></i>
 </a>
-<a asp-page="./Index"
-   asp-route-sortOrder="@Model.CurrentSort"
-   asp-route-pageIndex="@(Model.Cavalos.PageIndex + 1)"
-   asp-route-currentFilter="@Model.CurrentFilter"
-   class="btn btn-primary @nextDisabled">
-    Próximo
+
+<a asp-page="./Index" asp-route-sortOrder="@Model.CurrentSort" asp-route-pageIndex="@(Model.Cavalos.PageIndex + 1)" asp-route-currentFilter="@Model.CurrentFilter" class="btn btn-primary @nextDisabled" style="color: #dbae3f">
+    <i class="fa-solid fa-arrow-right fa-fw" style="color:black" title="Avançar"></i>
 </a>
