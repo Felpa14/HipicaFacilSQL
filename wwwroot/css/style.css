@@ -2237,6 +2237,7 @@ progress {
         -webkit-overflow-scrolling: touch;
     }
 }
+.table.table-responsive{-sm|-md|-lg|-xl}max-width
 
 .form-label {
     margin-bottom: 0.5rem;
