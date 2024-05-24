@@ -35,10 +35,10 @@
             @Model.Cavalo.Idade
         </div>
         <div class="col-sm-4">
-            <p class="font-weight-bold mt-2">Documentos:</p>
+            <p class="font-weight-bold mt-2"><u>Documentos:</u></p>
             @foreach (var docPath in @Model.Cavalo.DocumentosPaths)
             {
-                <a href="@docPath" target="_blank">@System.IO.Path.GetFileName(docPath)</a>
+                <a class="text-decoration-underline" href="@docPath" target="_blank">@System.IO.Path.GetFileName(docPath)</a>
 
                 <br />
             }
