@@ -6,67 +6,55 @@
 }
 
 
-<div>
-    <h4>Detalhes dos Cliente</h4>
+<div class="container">
+    <h4 class="fs-2 mt-2 "><i class="fa-solid fa-magnifying-glass"></i>  - Detalhes dos Cliente</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cliente.Nome)
-        </dt>
-        <dd class="col-sm-10">
+        <div class="row">
+            <div class="col-sm-4">
+            <p class="font-weight-bold mt-2">Nome:</p>
             @Html.DisplayFor(model => model.Cliente.Nome)
-        </dd>
-        <dt class="col-sm-2">
-           E-mail
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cliente.Email)
-        </dd>
-        <dt class="col-sm-2">
-            Endereço
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cliente.Endereco)
-        </dd>
-        <dt class="col-sm-2">
-            CPF
-        </dt>
-        <dd class="col-sm-10">
+            </div>
+            <div class="col-sm-4">
+            <p class="font-weight-bold mt-2">CPF:</p>
             @Html.DisplayFor(model => model.Cliente.Cpf)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cliente.Telefone)
-        </dt>
-        <dd class="col-sm-10">
+            </div>
+            <div class="col-sm-4">
+            <p class="font-weight-bold mt-2">Telefone:</p>
             @Html.DisplayFor(model => model.Cliente.Telefone)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cliente.Cidade)
-        </dt>
-        <dd class="col-sm-10">
+            </div>
+        </div>
+        <br />
+    <div class="row">
+        <div class="col-sm-4">
+            <p class="font-weight-bold mt-2">E-mail:</p>
+            @Html.DisplayFor(model => model.Cliente.Email)
+        </div>
+        <div class="col-sm-4">
+            <p class="font-weight-bold mt-2">Endereço:</p>
+            @Html.DisplayFor(model => model.Cliente.Endereco)
+        </div>
+        <div class="col-sm-4">
+            <p class="font-weight-bold mt-2">Cidade:</p>
             @Html.DisplayFor(model => model.Cliente.Cidade)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cliente.Complemento)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cliente.Complemento)
-        </dd>
-        <dt class="col-sm-2">
-           CEP
-        </dt>
-        <dd class="col-sm-10">
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-4">
+            <p class="font-weight-bold mt-2">CEP:</p>
             @Html.DisplayFor(model => model.Cliente.Cep)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cliente.Bairro)
-        </dt>
-        <dd class="col-sm-10">
+        </div>
+        <div class="col-sm-4">
+            <p class="font-weight-bold mt-2">Complemento:</p>
+            @Html.DisplayFor(model => model.Cliente.Complemento)
+        </div>
+        <div class="col-sm-4">
+            <p class="font-weight-bold mt-2">Bairro:</p>
             @Html.DisplayFor(model => model.Cliente.Bairro)
-        </dd>
-
-    </dl>
+        </div>
+    </div>    
 </div>
+<hr />
 <div>
     <a asp-page="./Index"><i class="fa-solid fa-backward-step" ></i> Voltar para a tabela </a> |
     <a asp-page="./Edit" asp-route-id="@Model.Cliente.ID"><i class="fa-solid fa-pen"></i> Editar Cliente</a>

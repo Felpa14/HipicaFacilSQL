@@ -21,8 +21,7 @@
     </div>
 </form>
 
-
-<table class="table">
+<table class="table-responsive">
     <thead>
         <tr>
             <th>
@@ -67,7 +66,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Quantidade)
             </td>
-            <td>
+             <td class="text-center">
                <a asp-page="./Edit" asp-route-id="@item.ID"><i class="fa-solid fa-pen"></i></a> |
                 <a asp-page="./Details" asp-route-id="@item.ID"><i class="fa-solid fa-magnifying-glass"></i></a> |
                 <a asp-page="./Delete" asp-route-id="@item.ID"><i class="fa-solid fa-trash"></i></a>
@@ -76,7 +75,7 @@
 }
     </tbody>
 </table>
-
+<hr />
 
 
 
