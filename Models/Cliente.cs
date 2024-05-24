@@ -26,6 +26,7 @@ namespace HipicaFacilSQL.Models
         [Required(ErrorMessage = "O telefone é obrigatório.")]
         [RegularExpression(@"^\(\d{2}\)\d{5}-\d{4}$", ErrorMessage = "Formato de telefone inválido. Use o formato (00)12345-6789.")]
         public string Telefone { get; set; }
+
         public string? Bairro { get; set; }
 
         public string ?Cidade { get; set; }

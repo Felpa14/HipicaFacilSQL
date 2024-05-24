@@ -18,7 +18,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #F5F6F8;
 }
 
 .nav-link-side {
@@ -82,10 +83,11 @@ body {
 /* Estilo para o conteúdo principal */
 #main-content {
     padding: 20px; /* Preenchimento */
-    margin-top: 0px; /* Margem superior */
+    margin-top: 20px; /* Margem superior */
     margin-bottom: 20px;
     z-index: 0; /* Z-index */
     position: relative; /* Posição relativa */
+    background-color: lightyellow;
 }
 
 .list-group-item {

@@ -5630,11 +5630,11 @@ textarea.form-control-lg {
     .list-group-flush > .list-group-item {
         border-width: 0 0 var(--bs-list-group-border-width);
         color: #2f2e3c;
-        border-width: 1px;
+/*        border-width: 0.1px;*/
     }
 
         .list-group-flush > .list-group-item:last-child {
-            border-bottom-width: 3px;
+            /*border-bottom-width: 3px;*/
         }
 
 .list-group-item-primary {
@@ -12420,7 +12420,7 @@ textarea.form-control-lg {
 }
 
     #sidebar-wrapper .sidebar-heading {
-        padding: 24px;
+        padding: 3px;
         font-size: 1.2rem;
         color: #2f2e3c;
         font-weight: 700;
@@ -12433,6 +12433,7 @@ textarea.form-control-lg {
 
 #page-content-wrapper {
     min-width: 100vw;
+    border-left-style:
 }
 
 body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
@@ -12447,6 +12448,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     #page-content-wrapper {
         min-width: 0;
         width: 100%;
+        background-color: lightyellow;
     }
 
     body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
