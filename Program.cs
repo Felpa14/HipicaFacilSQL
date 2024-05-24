@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using HipicaFacilSQL.Data;
 using HipicaFacilSQL.Services;
+using Microsoft.AspNetCore.Identity;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<HipicaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HipicaContext") ?? throw new InvalidOperationException("Connection string 'HipicaContext' not found.")));
+
+
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");

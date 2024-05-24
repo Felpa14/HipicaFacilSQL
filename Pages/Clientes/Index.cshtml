@@ -5,22 +5,18 @@
     ViewData["Title"] = "Index";
 }
 <h1>Cadastro de Clientes</h1>
-<br />
-
-<p>
-    <a asp-page="Create"> <i class="fa-solid fa-plus"></i> Novo Cliente</a>
-</p>
-
+<hr />
+<br/>
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Encontre pelo Nome:
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-            <input type="submit" value="Pesquisar" class="btn btn-primary" /> |
-            <a asp-page="./Index">Voltar para a tabela</a>
+            <a asp-page="Create"> <i class="fa-solid fa-circle-plus fa-lg" style="color:green" align="right"></i>&ensp;Novo Cliente&ensp;</a>
+            | &ensp;Encontre pelo Nome:&ensp;
+            <input type="text" name="SearchString" style="border-radius:5px" value="@Model.CurrentFilter" />&ensp;
+            <input type="submit" value="Pesquisar" class="btn btn-primary" />&ensp; |
+            <a asp-page="./Index">&ensp;Voltar para a tabela</a>&ensp;&ensp;&ensp;&ensp;
         </p>
-
-    </div>
+    </div> 
 </form>
 
 <table class="table">
