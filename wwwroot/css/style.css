@@ -12458,8 +12458,8 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     .btn btn-primary {
         background-color: #dbae3f;
     }
-    #sidebarToggle{
-        background-color:white;
+    #sidebarToggle {
+        background-color: #212529;
     }
     
 }
@@ -12487,5 +12487,9 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 }
 #iconeAdd:hover {
     animation: beat 0.5s infinite alternate;
+}
+
+.fa-bars {
+    color: lightyellow;
 }
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
