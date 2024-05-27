@@ -103,11 +103,16 @@
             </div>
         </div>
             <br />
-            <div class="row">
-                <div class="col-sm-12">
-                <button type="submit" value="Create" class="btn btn-primary mt-3">Atualizar</button>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="submit" value="Create" class="btn mt-3" id="submit-button">Atualizar Cavalo</button>
+                <div id="submit-icon" style="display: none;">
+                    <i id="loading-icon-submit" class="fas fa-spinner fa-spin fa-2xl"></i>
+                    <i id="success-icon-submit" class="fas fa-check text-success fa-2xl" style="display: none; color:green"></i>
                 </div>
             </div>
+        </div>
         </div>
 </form>
 
@@ -118,9 +123,7 @@
 @section Scripts {
     <script>
         function excluirImagem() {
-            // Limpa o valor do campo de texto
             document.getElementById('imageUrl').value = '';
-            // Você pode adicionar aqui lógica adicional para processar a exclusão da imagem
         }
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
@@ -151,18 +154,17 @@
             valor = valor.replace(/(\d{2})(\d)/, '$1/$2');
             valor = valor.replace(/(\d{4})(\d{1,2})$/, '$1');
 
-            // Atualiza o valor do campo
+
             campo.value = valor;
         }
 
-        // Função para atualizar a idade do cavalo quando a data é alterada
+
         document.getElementById("dataNascimento").addEventListener("change", function () {
             var dataNascimento = this.value;
             var idade = calcularIdade(dataNascimento);
             document.getElementById("idadeCavalo").innerText = "Idade do cavalo: " + idade + " anos";
         });
 
-        // Função para calcular a idade com base na data de nascimento
         function calcularIdade(dataNascimento) {
             var hoje = new Date();
             var nascimento = new Date(dataNascimento.split('/').reverse().join('-'));
@@ -173,6 +175,27 @@
             }
             return idade;
         }
+
+        document.getElementById('cavaloForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var submitButton = document.getElementById('submit-button');
+            var submitIconContainer = document.getElementById('submit-icon');
+            var loadingIcon = document.getElementById('loading-icon-submit');
+            var successIcon = document.getElementById('success-icon-submit');
+
+            submitButton.style.display = 'none';
+            submitIconContainer.style.display = 'inline';
+
+            setTimeout(function () {
+                loadingIcon.style.display = 'none';
+                successIcon.style.display = 'inline';
+
+                setTimeout(function () {
+                    document.getElementById('cavaloForm').submit();
+                }, 1000);
+            }, 1000);
+        });
     </script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

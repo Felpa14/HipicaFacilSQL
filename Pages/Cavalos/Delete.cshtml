@@ -5,11 +5,11 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Deletar</h1>
-
-<h3>Tem certeza que deseja deletar?</h3>
+<h1 class="fs-2"><i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>&ensp;Remover Cavalo</h1>
+<hr />
+<h3>Tem certeza que deseja remover o cavalo?</h3>
+<br/>
 <div>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Cavalo.Nome)
@@ -55,9 +55,38 @@
         </dd>
     </dl>
     
-    <form method="post">
+    <form method="post" id="delete-form">
         <input type="hidden" asp-for="Cavalo.ID" />
-        <input type="submit" value="Apagar" class="btn btn-danger" /> |
-        <a asp-page="./Index"><i class="fa-solid fa-backward"></i> Voltar para a tabela </a>
+        <input type="submit" value="Apagar" class="btn btn-danger" id="submit-button" />
+        <div id="submit-icon" style="display: none;">
+            <i id="loading-icon-submit" class="fas fa-spinner fa-spin fa-2xl"></i>
+            <i id="success-icon-submit" class="fas fa-check text-success fa-2xl" style="display: none; color:green"></i>
+        </div>
     </form>
+    <br />
+    <a asp-page="./Index"><i class="fa-solid fa-backward-step"></i> Voltar</a>
 </div>
+
+<script>
+    document.getElementById('delete-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var submitButton = document.getElementById('submit-button');
+        var submitIconContainer = document.getElementById('submit-icon');
+        var loadingIcon = document.getElementById('loading-icon-submit');
+        var successIcon = document.getElementById('success-icon-submit');
+
+        submitButton.style.display = 'none';
+        submitIconContainer.style.display = 'inline';
+
+        setTimeout(function () {
+            loadingIcon.style.display = 'none';
+            successIcon.style.display = 'inline';
+
+            setTimeout(function () {
+                document.getElementById('delete-form'').submit();
+                }, 1000);
+        }, 1000);
+    });
+
+</script>

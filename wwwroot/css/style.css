@@ -5874,7 +5874,7 @@ textarea.form-control-lg {
     word-wrap: break-word;
 }
 
-.modal {
+/*.modal {
     --bs-modal-zindex: 1055;
     --bs-modal-width: 500px;
     --bs-modal-padding: 1rem;
@@ -6202,7 +6202,7 @@ textarea.form-control-lg {
         .modal-fullscreen-xxl-down .modal-body {
             overflow-y: auto;
         }
-}
+}*/
 
 .tooltip {
     --bs-tooltip-zindex: 1080;

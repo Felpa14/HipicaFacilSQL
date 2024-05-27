@@ -8,7 +8,7 @@
 <h1 class="fs-2"><i class="fa-solid fa-user-plus"></i>&ensp;Cadastro de Cliente</h1>
 <hr />
 
-<form method="post">
+<form method="post" id="create-form">
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-6">
@@ -92,8 +92,12 @@
         <br />
 
         <div class="row">
-            <div class="col-sm-12 ">
-                <button type="submit" value="Create" class="btn mt-3">Adicionar Cliente</button>
+            <div class="col-sm-12">
+                <button type="submit" value="Create" class="btn mt-3" id="submit-button">Adicionar Cliente</button>
+                <div id="submit-icon" style="display: none;">
+                    <i id="loading-icon-submit" class="fas fa-spinner fa-spin fa-2xl"></i>
+                    <i id="success-icon-submit" class="fas fa-check text-success fa-2xl" style="display: none; color:green"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -189,7 +193,26 @@
             campo.value = valor;
         }
 
+        document.getElementById('create-form').addEventListener('submit', function (event) {
+            event.preventDefault();
 
+            var submitButton = document.getElementById('submit-button');
+            var submitIconContainer = document.getElementById('submit-icon');
+            var loadingIcon = document.getElementById('loading-icon-submit');
+            var successIcon = document.getElementById('success-icon-submit');
+
+            submitButton.style.display = 'none';
+            submitIconContainer.style.display = 'inline';
+
+            setTimeout(function () {
+                loadingIcon.style.display = 'none';
+                successIcon.style.display = 'inline';
+
+                setTimeout(function () {
+                    document.getElementById('create-form').submit();
+                }, 1000);
+            }, 1000);
+        });
 
 
     </script>

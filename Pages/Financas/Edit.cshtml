@@ -2,28 +2,56 @@
 @model HipicaFacilSQL.Pages.Financas.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1 class="fs-2"><i class="fa-solid fa-pen-to-square"></i>&ensp;Editar Finanças</h1>
+<h1 class="fs-2"><i class="fa-solid fa-pen-to-square"></i>&ensp;Editar Receita/Despesa</h1>
 <hr />
 <br />
 
-<form method="post">
+<form method="post" id="create-form" onsubmit="prepareValueForSubmission()">
     <input type="hidden" asp-for="Financa.ID" /> @*NAO DELETA, SENAO O CODIGO QUEBRA*@
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="nome" placeholder="" maxlength="50" required asp-for="Financa.Nome" />
+                    <select id="nome" asp-for="Financa.Nome" class="form-select" required>
+                        <option value="">Selecione uma opção:</option>
+                        <optgroup label="Despesas">
+                            <option value="Pgto. Conta de Água">Pgto. Conta de Água</option>
+                            <option value="Pgto. Conta de Energia">Pgto. Conta de Energia</option>
+                            <option value="Pgto. Conta de Internet">Pgto. Conta de Internet</option>
+                            <option value="Folha de Pagamento">Folha de pagamento</option>
+                            <option value="Medicamentos Equinos">Medicamentos Equinos</option>
+                            <option value="Ração e Afins">Ração e Afins</option>
+                            <option value="Manutenção de Instalações">Manutenção de Instalações</option>
+                            <option value="Compra de Equipamentos">Compra de Equipamentos</option>
+                            <option value="Manutenção de Equipamentos">Manutenção de Equipamentos</option>
+                            <option value="Seguro de Animais">Seguro de Animais</option>
+                            <option value="Treinamento de Cavalos">Treinamento de Cavalos</option>
+                            <option value="Taxas de Competições">Taxas de Competições</option>
+                            <option value="Reparos em Pistas">Reparos em Pistas</option>
+                            <option value="Serviços de Instrutores">Serviços de Instrutores</option>
+                            <option value="Compra de Material de Limpeza">Compra de Material de Limpeza</option>
+                            <option value="Outros">Outros</option>
+                        </optgroup>
+                        <optgroup label="Receitas">
+                            <option value="Pgto. Aula">Pgto. Aula</option>
+                            <option value="Venda de Animais">Venda de Animais</option>
+                            <option value="Aluguel de Instalações">Aluguel de Instalações</option>
+                            <option value="Patrocínios">Patrocínios</option>
+                            <option value="Serviços de Transporte de Animais">Serviços de Transporte de Animais</option>
+                            <option value="Consultoria">Consultoria</option>
+                            <option value="Outros">Outros</option>
+                        </optgroup>
+                    </select>
                     <label for="nome">Nome:</label>
-                    <small class="text-muted">Ex: "Racao"</small>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-floating">
-                    <select id="tipo" asp-for="Financa.Tipo" class="form-select" required>
-                        <option value="Lucro">Lucro</option>
+                    <select id="tipo" asp-for="Financa.Tipo" class="form-select" onchange="handleTipoChange()" required>
+                        <option value="Receita">Receita</option>
                         <option value="Despesa">Despesa</option>
                     </select>
                     <label for="tipo">Tipo:</label>
@@ -34,16 +62,16 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-floating">
-                    <input type="number" id="valor" asp-for="Financa.Valor" class="form-control" placeholder=" " />
+                    <input type="text" id="valor" asp-for="Financa.Valor" class="form-control" placeholder=" " oninput="formatarValor()" />
                     <label for="valor">Valor:</label>
-                    <small class="text-muted">Ex: "1200"</small>
+                    <small class="text-muted">Ex: "R$ 1200,00"</small>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-floating">
                     <input type="text" id="descricao" asp-for="Financa.Descricao" class="form-control" placeholder=" " />
                     <label for="descricao">Descrição:</label>
-                    <small class="text-muted">Ex: "Racao dos cavalos de corrida"</small>
+                    <small class="text-muted">Ex: "Pagamento funcionário X"</small>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -54,55 +82,79 @@
                 </div>
             </div>
             <br />
+            <br />
             <div class="row">
                 <div class="col-sm-12">
-                    <button type="submit" value="Create" class="btn btn-primary mt-3">Atualizar</button>
+                    <button type="submit" value="Create" class="btn mt-3" id="submit-button">Atualizar Receita/Despesa</button>
+                    <div id="submit-icon" style="display: none;">
+                        <i id="loading-icon-submit" class="fas fa-spinner fa-spin fa-2xl"></i>
+                        <i id="success-icon-submit" class="fas fa-check text-success fa-2xl" style="display: none; color:green"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
-@* <div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Financa.ID" />
-            <div class="form-group">
-                <label asp-for="Financa.Nome" class="control-label"></label>
-                <input asp-for="Financa.Nome" class="form-control" />
-                <span asp-validation-for="Financa.Nome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Financa.Valor" class="control-label"></label>
-                <input asp-for="Financa.Valor" class="form-control" />
-                <span asp-validation-for="Financa.Valor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Financa.Descricao" class="control-label"></label>
-                <input asp-for="Financa.Descricao" class="form-control" />
-                <span asp-validation-for="Financa.Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Financa.Tipo" class="control-label"></label>
-                <input asp-for="Financa.Tipo" class="form-control" />
-                <span asp-validation-for="Financa.Tipo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Financa.Quantidade" class="control-label"></label>
-                <input asp-for="Financa.Quantidade" class="form-control" />
-                <span asp-validation-for="Financa.Quantidade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div> *@
 
 <div>
-    <a asp-page="Index"><i class="fa-solid fa-backward-step"></i>  Voltar para a Tabela</a>
+    <a asp-page="Index"><i class="fa-solid fa-backward-step"></i> Voltar para a Tabela</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function handleTipoChange() {
+            var tipo = document.getElementById("tipo").value;
+            var valorInput = document.getElementById("valor");
+            var valor = valorInput.value;
+
+            if (tipo === "Despesa") {
+                if (!valor.startsWith("-")) {
+                    valorInput.value = "-" + valor;
+                }
+            } else if (tipo === "Receita" && valor.startsWith("-")) {
+                valorInput.value = valor.substring(1);
+            }
+        }
+
+        function formatarValor() {
+            var valorInput = document.getElementById("valor");
+            var valor = valorInput.value.replace(/[^\d,-]/g, ''); // Remove todos os caracteres não numéricos exceto dígitos, vírgula e hífen
+            var partes = valor.split(',');
+            if (partes.length > 2) {
+                valor = partes[0] + ',' + partes[1]; // Mantém apenas a primeira vírgula e ignora o restante
+            }
+            valorInput.value = valor;
+        }
+
+        function prepareValueForSubmission() {
+            var valorInput = document.getElementById("valor");
+            // Substitui vírgula por ponto antes de enviar o valor
+            valorInput.value = valorInput.value.replace(",", ".");
+        }
+
+        document.getElementById('create-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var submitButton = document.getElementById('submit-button');
+            var submitIconContainer = document.getElementById('submit-icon');
+            var loadingIcon = document.getElementById('loading-icon-submit');
+            var successIcon = document.getElementById('success-icon-submit');
+
+            submitButton.style.display = 'none';
+            submitIconContainer.style.display = 'inline';
+
+            setTimeout(function () {
+                loadingIcon.style.display = 'none';
+                successIcon.style.display = 'inline';
+
+                setTimeout(function () {
+                    document.getElementById('create-form').submit();
+                }, 1000);
+            }, 1000);
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HipicaFacilSQL.Data;
 using HipicaFacilSQL.Models;
+using System.Threading.Tasks;
 
 namespace HipicaFacilSQL.Pages.Financas
 {
     public class EditModel : PageModel
     {
-        private readonly HipicaFacilSQL.Data.HipicaContext _context;
+        private readonly HipicaContext _context;
 
-        public EditModel(HipicaFacilSQL.Data.HipicaContext context)
+        public EditModel(HipicaContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Financa Financa { get; set; } = default!;
+        public Financa Financa { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,17 +26,15 @@ namespace HipicaFacilSQL.Pages.Financas
                 return NotFound();
             }
 
-            var financa =  await _context.Financas.FirstOrDefaultAsync(m => m.ID == id);
-            if (financa == null)
+            Financa = await _context.Financas.FirstOrDefaultAsync(m => m.ID == id);
+
+            if (Financa == null)
             {
                 return NotFound();
             }
-            Financa = financa;
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
