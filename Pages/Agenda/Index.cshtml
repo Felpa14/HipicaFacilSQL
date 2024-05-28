@@ -1,128 +1,175 @@
 ﻿
-@page
-@model HipicaFacilSQL.Pages.Agenda.IndexModel
+    @page
+    @model HipicaFacilSQL.Pages.Agenda.IndexModel
 
-@{
-    ViewData["Title"] = "Index";
-}
+    @{
+        ViewData["Title"] = "Index";
+    }
 
-<h4 class="fs-2"><i class="fa-solid fa-calendar-days"></i> Calendário</h4>
+    <h1 class="fs-2"><i class="fa-solid fa-calendar-days"></i>&ensp;Agenda</h1>
+    <hr />
+    <br />
+    <style>
+    #calendar {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    </style>
+
+    <button class="mt-4 btn-custom" type="button" id="btnOpenForm" onclick="openForm()"style="border-radius:5px">
+        <i id="iconeAdd" class="fa-solid fa-circle-plus" style="color:black" ; align="right;"></i>&ensp;Novo Evento&ensp;
+    </button>
+    <br/>
 
 
-<button class="mt-4" type="button" id="btnOpenForm">Novo Evento</button>
+    <div id="modalCreateEvent" style="display: none;">
+        <form id="formCreateEvent" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<div id="modalCreateEvent" style="display: none;">
-<form id="formCreateEvent" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="NovoEvento.Title" class="control-label"></label>
-        <input asp-for="NovoEvento.Title" class="form-control" id="eventTitle" />
-        <span asp-validation-for="NovoEvento.Title" class="text-danger"></span>
+            <div class="col-sm-4">
+                <div class="form-floating">
+                    <input type="text" asp-for="NovoEvento.Title" class="form-control" id="eventTitle" placeholder=" " />
+                    <label for="eventTitle">Nome do Evento:</label>
+                    <span asp-validation-for="NovoEvento.Title" class="text-danger"></span>
+                </div>
+            </div>
+            <br/>
+
+            <div class="col-sm-4">
+                <div class="form-floating">
+                    <input type="datetime-local" asp-for="NovoEvento.Start" class="form-control" id="eventStart" placeholder=" " />
+                    <label for="eventStart">Início do Evento:</label>
+                    <span asp-validation-for="NovoEvento.Start" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="col-sm-4">
+                <div class="form-floating">
+                    <input type="datetime-local" asp-for="NovoEvento.End" class="form-control" id="eventEnd" placeholder=" " />
+                    <label for="eventEnd">Fim do Evento:</label>
+                    <span asp-validation-for="NovoEvento.End" class="text-danger"></span>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Adicionar Evento" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="NovoEvento.Start" class="control-label"></label>
-        <input asp-for="NovoEvento.Start" class="form-control" id="eventStart" />
-        <span asp-validation-for="NovoEvento.Start" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="NovoEvento.End" class="control-label"></label>
-        <input asp-for="NovoEvento.End" class="form-control" id="eventEnd" />
-        <span asp-validation-for="NovoEvento.End" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
-</form>
-</div>
+    <br/>
+    <br/>
 
 
 
 <div id="calendar"></div>
 
-@section Scripts {
-    <script src="~/fullcalendar-6.1.11/fullcalendar-6.1.11/dist/index.global.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
+    @section Scripts {
+        <script src="~/fullcalendar-6.1.11/fullcalendar-6.1.11/dist/index.global.js"></script>
+        <script src="~/fullcalendar-6.1.11/fullcalendar-6.1.11/dist/index.global.min.js"></script>
+        <script>
 
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: function (fetchInfo, successCallback, failureCallback) {
-                    $.ajax({
-                        url: '/api/Eventos',
-                        method: 'GET',
-                        success: function (data) {
-                            successCallback(data);
-                        },
-                        error: function () {
-                            failureCallback();
-                        }
-                    });
+            document.addEventListener('DOMContentLoaded', function () {
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale:'pt-br',
+                dayMaxEventRows: true,
+                navLink:true,
+                nowIndicator: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,listWeek'
                 },
-                eventClick: function (info) {
-                    if (confirm("Você quer deletar este evento?")) {
-                        // Remover o evento do calendário
-                        info.event.remove();
+                navLinks: true,
+                dayMaxEvents: true,
+                slotLabelPlacement: 'start',
+                views: {
+                    timeGrid: {
+                        dayMaxEventRows: 6
+                    }
+                },
 
-                        // Enviar solicitação de exclusão para o servidor
+                    events: function (fetchInfo, successCallback, failureCallback) {
                         $.ajax({
-                            url: '/api/Eventos/Delete/' + info.event.id,
-                            method: 'DELETE',
-                            success: function (response) {
-                                console.log('Evento deletado com sucesso:', response);
+                            url: '/api/Eventos',
+                            method: 'GET',
+                            success: function (data) {
+                                successCallback(data);
                             },
-                            error: function (xhr, status, error) {
-                                console.error('Erro ao deletar evento:', xhr.responseText);
+                            error: function () {
+                                failureCallback();
                             }
                         });
-                    }
-                }
-            });
-
-            calendar.render();
-
-            // Abrir o modal para criar evento quando o botão é clicado
-            document.getElementById('btnOpenForm').addEventListener('click', function () {
-                document.getElementById('modalCreateEvent').style.display = 'block';
-            });
-
-            // Submeter o formulário de criação de evento
-            document.getElementById('formCreateEvent').addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                var title = document.getElementById('eventTitle').value;
-                var start = document.getElementById('eventStart').value;
-                var end = document.getElementById('eventEnd').value;
-
-                // Adicionar o evento ao calendário
-                var newEvent = {
-                    title: title,
-                    start: start,
-                    end: end
-                };
-
-                $.ajax({
-                    url: '/api/Eventos/Create',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(newEvent),
-                    success: function (response) {
-                        newEvent.id = response.id;  // Assumindo que a resposta contém o ID do evento criado
-                        calendar.addEvent(newEvent);
-                        console.log('Evento criado com sucesso:', response);
                     },
-                    error: function (xhr, status, error) {
-                        console.error('Erro ao criar evento:', xhr.responseText);
+                    eventClick: function (info) {
+                        if (confirm("Você quer deletar este evento?")) {
+                            info.event.remove();
+
+                            $.ajax({
+                                url: '/api/Eventos/Delete/' + info.event.id,
+                                method: 'DELETE',
+                                success: function (response) {
+                                    console.log('Evento deletado com sucesso:', response);
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error('Erro ao deletar evento:', xhr.responseText);
+                                }
+                            });
+                        }
                     }
                 });
 
-                // Fechar o modal após a submissão
-                document.getElementById('modalCreateEvent').style.display = 'none';
+                calendar.render();
+
+                document.getElementById('btnOpenForm').addEventListener('click', function () {
+                    document.getElementById('modalCreateEvent').style.display = 'block';
+                });
+
+                document.getElementById('formCreateEvent').addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    var title = document.getElementById('eventTitle').value;
+                    var start = document.getElementById('eventStart').value;
+                    var end = document.getElementById('eventEnd').value;
+
+                    // Adicionar o evento ao calendário
+                    var newEvent = {
+                        title: title,
+                        start: start,
+                        end: end
+                    };
+
+                    $.ajax({
+                        url: '/api/Eventos/Create',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(newEvent),
+                        success: function (response) {
+                            newEvent.id = response.id;
+                            calendar.addEvent(newEvent);
+                            console.log('Evento criado com sucesso:', response);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Erro ao criar evento:', xhr.responseText);
+                        }
+                    });
+
+                    document.getElementById('modalCreateEvent').style.display = 'none';
+
+                document.getElementById('btnOpenForm').style.display = 'block';
+                });
+
             });
-        });
-    </script>
-}
+                function openForm() {
+                    document.getElementById('btnOpenForm').style.display = 'none';
+                    document.getElementById('modalCreateEvent').style.display = 'block';
+                }
+
+        </script>
+    }
 
 
 
-@Html.AntiForgeryToken()  
+    @Html.AntiForgeryToken()  
