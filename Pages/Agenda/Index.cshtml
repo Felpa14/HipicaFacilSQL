@@ -42,14 +42,41 @@
 @section Scripts {
     <script src="~/fullcalendar-6.1.11/fullcalendar-6.1.11/dist/index.global.js"></script>
     <script>
-
-        // script.js
-
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                // configurações do calendário...
+                initialView: 'dayGridMonth',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    $.ajax({
+                        url: '/api/Eventos',
+                        method: 'GET',
+                        success: function (data) {
+                            successCallback(data);
+                        },
+                        error: function () {
+                            failureCallback();
+                        }
+                    });
+                },
+                eventClick: function (info) {
+                    if (confirm("Você quer deletar este evento?")) {
+                        // Remover o evento do calendário
+                        info.event.remove();
+
+                        // Enviar solicitação de exclusão para o servidor
+                        $.ajax({
+                            url: '/api/Eventos/Delete/' + info.event.id,
+                            method: 'DELETE',
+                            success: function (response) {
+                                console.log('Evento deletado com sucesso:', response);
+                            },
+                            error: function (xhr, status, error) {
+                                console.error('Erro ao deletar evento:', xhr.responseText);
+                            }
+                        });
+                    }
+                }
             });
 
             calendar.render();
@@ -68,36 +95,34 @@
                 var end = document.getElementById('eventEnd').value;
 
                 // Adicionar o evento ao calendário
-                calendar.addEvent({
+                var newEvent = {
                     title: title,
                     start: start,
                     end: end
+                };
+
+                $.ajax({
+                    url: '/api/Eventos/Create',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(newEvent),
+                    success: function (response) {
+                        newEvent.id = response.id;  // Assumindo que a resposta contém o ID do evento criado
+                        calendar.addEvent(newEvent);
+                        console.log('Evento criado com sucesso:', response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Erro ao criar evento:', xhr.responseText);
+                    }
                 });
 
                 // Fechar o modal após a submissão
                 document.getElementById('modalCreateEvent').style.display = 'none';
-
-                // Enviar o evento para o servidor via AJAX
-                $.ajax({
-                    url: '/api/Eventos/Create',
-                    method: 'POST',
-                    data: {
-                        title: title,
-                        start: start,
-                        end: end
-                    },
-                    success: function (response) {
-                        // Se necessário, manipule a resposta do servidor aqui
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
             });
         });
-
     </script>
 }
-@Html.AntiForgeryToken()
+
+
 
 @Html.AntiForgeryToken()  

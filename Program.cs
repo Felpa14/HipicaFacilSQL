@@ -4,7 +4,6 @@ using HipicaFacilSQL.Data;
 using HipicaFacilSQL.Services;
 using Microsoft.AspNetCore.Identity;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,18 +11,25 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<HipicaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HipicaContext") ?? throw new InvalidOperationException("Connection string 'HipicaContext' not found.")));
 
-
-
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 
-//REST API CARAIOOO
-builder.Services.AddRazorPages();
+// Adicione o suporte a controllers
 builder.Services.AddHttpClient<ViaCEPService>();
 builder.Services.AddControllersWithViews();
-
-// Adicione o suporte a controllers
 builder.Services.AddControllers();
+
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 
@@ -49,23 +55,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Use CORS
+app.UseCors("AllowAll");
+
 app.UseAuthorization();
 
-
 app.MapControllers();
-
 app.MapRazorPages();
 
 app.Run();
-
-// Adicione a rota de API
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowSpecificOrigins",
-        builder =>
-        {
-            builder.WithOrigins("https://viacep.com.br/ws/01001000/json/?callback=callback_name")
-                   .AllowAnyHeader()
-                   .AllowAnyMethod();
-        });
-});
