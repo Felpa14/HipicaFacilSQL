@@ -2,45 +2,40 @@
 @model HipicaFacilSQL.Pages.Produtos.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Produto";
 } 
 
-<div>
-    <h4>Detalhes do Produto</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Produto.Nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Produto.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Produto.Validade)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Produto.Validade)
-        </dd>
-        <dt class="col-sm-2">
-           Descrição
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Produto.Descricao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Produto.Tipo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Produto.Tipo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Produto.Quantidade)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Produto.Quantidade)
-        </dd>
-    </dl>
-</div>
+    <div class="container">
+        <h4 class="fs-2 mt-2"><i class="fa-solid fa-magnifying-glass"></i>&ensp;Detalhes do Produto</h4>
+        <hr />
+        <div class="row">
+            <div class="col-sm-4">
+                <p class="font-weight-bold mt-2">Nome:</p>
+                @Html.DisplayFor(model => model.Produto.Nome)
+            </div>
+            <div class="col-sm-4">
+                <p class="font-weight-bold mt-2">Validade:</p>
+                @Html.DisplayFor(model => model.Produto.Validade)
+            </div>
+            <div class="col-sm-4">
+                <p class="font-weight-bold mt-2">Descrição:</p>
+                @Html.DisplayFor(model => model.Produto.Descricao)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-4">
+                <p class="font-weight-bold mt-2">Tipo:</p>
+                @Html.DisplayFor(model => model.Produto.Tipo)
+            </div>
+            <div class="col-sm-4">
+                <p class="font-weight-bold mt-2">Quantidade:</p>
+                @Html.DisplayFor(model => model.Produto.Quantidade)
+            </div>
+        </div>
+        <hr />
+    </div>
+
 <div>
     <a asp-page="./Index"><i class="fa-solid fa-backward-step"></i> Voltar para a tabela </a> |
     <a asp-page="./Edit" asp-route-id="@Model.Produto.ID"><i class="fa-solid fa-pen"></i> Editar Produto</a>

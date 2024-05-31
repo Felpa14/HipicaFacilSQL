@@ -4,44 +4,38 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Detalhes receita/despesa</h1>
-
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Financa.Nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Financa.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Financa.Valor)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Financa.Valor)
-        </dd>
-        <dt class="col-sm-2">
-            Descrição
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Financa.Descricao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Financa.Tipo)
-        </dt>
-        <dd class="col-sm-10">
+ 
+<h4 class="fs-2 mt-2"><i class="fa-solid fa-magnifying-glass"></i>&ensp;Detalhes da receita/despesa</h4>
+ <hr />
+ <div class="container">
+     <div class="row">
+    <div class="col-sm-4">
+        <p class="font-weight-bold mt-2">Nome:</p>
+        @Html.DisplayFor(model => model.Financa.Nome)
+    </div>
+    <div class="col-sm-4">
+        <p class="font-weight-bold mt-2">Valor:</p>
+        @Html.DisplayFor(model => model.Financa.Valor)
+    </div>
+    <div class="col-sm-4">
+        <p class="font-weight-bold mt-2">Descrição:</p>
+        @Html.DisplayFor(model => model.Financa.Descricao)
+    </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-4">
+            <p class="font-weight-bold mt-2">Tipo:</p>
             @Html.DisplayFor(model => model.Financa.Tipo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Financa.Quantidade)
-        </dt>
-        <dd class="col-sm-10">
+        </div>
+        <div class="col-sm-4">
+            <p class="font-weight-bold mt-2">Quantidade:</p>
             @Html.DisplayFor(model => model.Financa.Quantidade)
-        </dd>
-    </dl>
+        </div>
+    </div>
 </div>
+<hr />
+
 <div>
     <a asp-page="./Index"><i class="fa-solid fa-backward-step"></i> Voltar para a tabela </a> |
     <a asp-page="./Edit" asp-route-id="@Model.Financa.ID"><i class="fa-solid fa-pen"></i> Editar Lucro/Despesa</a>

@@ -6,9 +6,8 @@
         ViewData["Title"] = "Index";
     }
 
-    <h1 class="fs-2"><i class="fa-solid fa-calendar-days"></i>&ensp;Agenda</h1>
+    <h4 class="fs-2 mt-2"><i class="fa-solid fa-calendar-days"></i>&ensp;Agenda</h4>
     <hr />
-    <br />
     <style>
     #calendar {
         max-width: 1100px;
@@ -22,30 +21,27 @@
     </button>
     <br/>
 
-
     <div id="modalCreateEvent" style="display: none;">
         <form id="formCreateEvent" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="col-sm-4">
+        <div class="col-sm-4 mt-2">
                 <div class="form-floating">
                     <input type="text" asp-for="NovoEvento.Title" class="form-control" id="eventTitle" placeholder=" " />
                     <label for="eventTitle">Nome do Evento:</label>
                     <span asp-validation-for="NovoEvento.Title" class="text-danger"></span>
                 </div>
             </div>
-            <br/>
 
-            <div class="col-sm-4">
+        <div class="col-sm-4 mt-3">
                 <div class="form-floating">
                     <input type="datetime-local" asp-for="NovoEvento.Start" class="form-control" id="eventStart" placeholder=" " />
                     <label for="eventStart">Início do Evento:</label>
                     <span asp-validation-for="NovoEvento.Start" class="text-danger"></span>
                 </div>
             </div>
-            <br />
-
-            <div class="col-sm-4">
+ 
+            <div class="col-sm-4 mt-3">
                 <div class="form-floating">
                     <input type="datetime-local" asp-for="NovoEvento.End" class="form-control" id="eventEnd" placeholder=" " />
                     <label for="eventEnd">Fim do Evento:</label>
@@ -56,9 +52,9 @@
             <div class="form-group">
                 <input type="submit" value="Adicionar Evento" class="btn btn-primary" />
             </div>
+            <hr />
         </form>
     </div>
-    <br/>
     <br/>
 
 
